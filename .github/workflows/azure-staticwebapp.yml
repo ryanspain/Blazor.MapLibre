@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "9.0.x" # Use the same target version as your Blazor project
+          dotnet-version: "8.0.x" # Use the same target version as your Blazor project
 
       # Step 3: Publish the Blazor WebAssembly app
       - name: Publish Blazor WebAssembly app
