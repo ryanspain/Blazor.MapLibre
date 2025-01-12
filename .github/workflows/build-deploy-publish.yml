@@ -43,7 +43,7 @@ jobs:
 
       # Step 7: Upload NuGet packages as artifact
       - name: Upload NuGet Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nuget
           path: nuget/
@@ -70,7 +70,7 @@ jobs:
     steps:
       # Step 1: Download NuGet package artifact from the Build job
       - name: Download NuGet Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nuget
           path: nuget
