@@ -4,6 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+
+        <PackageId>Community.Blazor.MapLibre</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Yet-Another-Solution</Authors>
+        <Description>C# Wrapper around a MapLibre GL JS library</Description>
+        <LicenseUrl>https://opensource.org/license/unlicense</LicenseUrl>
+        <RepositoryUrl>https://github.com/Yet-another-solution/Blazor.MapLibre</RepositoryUrl>
+        <PackageTags>Blazor; MapLibre; Components</PackageTags>
     </PropertyGroup>
 
 
