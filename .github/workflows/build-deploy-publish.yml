@@ -34,11 +34,11 @@ jobs:
 
       # Step 5: Test the Library Project (Optional If You Only Want to Test Library)
       - name: Test Library
-        run: dotnet test Community.Blazor.Maplibre/Community.Blazor.MapLibre.csproj --verbosity normal -c Release
+        run: dotnet test Community.Blazor.MapLibre/Community.Blazor.MapLibre.csproj --verbosity normal -c Release
 
       # Step 6: Pack the Library for NuGet
       - name: Pack NuGet Library
-        run: dotnet pack Community.Blazor.Maplibre/Community.Blazor.MapLibre.csproj -c Release --no-build --output nuget
+        run: dotnet pack Community.Blazor.MapLibre/Community.Blazor.MapLibre.csproj -c Release --no-build --output nuget
         # Only pack `Community.Blazor.MapLibre.csproj` for NuGet, not the examples
 
       # Step 7: Upload NuGet packages as artifact
