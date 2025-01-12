@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{FB2BD75E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{1041976B-4110-4B6A-9130-0144068C0638}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\azure-staticwebapp.yml = .github\workflows\azure-staticwebapp.yml
+		.github\workflows\build-deploy-publish.yml = .github\workflows\build-deploy-publish.yml
 	EndProjectSection
 EndProject
 Global
