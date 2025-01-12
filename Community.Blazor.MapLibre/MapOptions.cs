@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Community.Blazor.MapLibre.Models;
 
 namespace Community.Blazor.MapLibre;
 
@@ -71,7 +72,7 @@ public class MapOptions
     /// <summary>
     /// If set, the map will be constrained to the given bounds.
     /// </summary>
-    public LngLatBoundsLike MaxBounds { get; set; }
+    public LngLatBounds MaxBounds { get; set; }
 
     /// <summary>
     /// If `true`, the "scroll to zoom" interaction is enabled.
@@ -145,7 +146,7 @@ public class MapOptions
     /// <summary>
     /// The initial geographical centerpoint of the map. If `center` is not specified, it defaults to [0, 0].
     /// </summary>
-    public LngLatLike Center { get; set; } = new LngLatLike { Longitude = 0, Latitude = 0 };
+    public LngLat Center { get; set; } = new LngLat { Longitude = 0, Latitude = 0 };
 
     /// <summary>
     /// The initial zoom level of the map. Defaults to 0.
@@ -160,35 +161,3 @@ public class MapOptions
     public object Style { get; set; } = "https://demotiles.maplibre.org/style.json";
 }
 
-/// <summary>
-/// Represents a geographical coordinate (longitude and latitude).
-/// </summary>
-public class LngLatLike
-{
-    [JsonPropertyName("lon")]
-    public double Longitude { get; set; }
-    [JsonPropertyName("lat")]
-    public double Latitude { get; set; }
-}
-
-/// <summary>
-/// Represents bounds for geographical coordinates.
-/// </summary>
-public class LngLatBoundsLike
-{
-    public LngLatLike Southwest { get; set; }
-    public LngLatLike Northeast { get; set; }
-}
-
-/// <summary>
-/// WebGL context attributes for the map.
-/// </summary>
-public class WebGLContextAttributes
-{
-    public bool? Antialias { get; set; }
-    public string PowerPreference { get; set; } = "high-performance";
-    public bool? PreserveDrawingBuffer { get; set; }
-    public bool? FailIfMajorPerformanceCaveat { get; set; }
-    public bool? Desynchronized { get; set; }
-    public string ContextType { get; set; } = "webgl2withfallback";
-}
