@@ -6,6 +6,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Unlicense License][license-shield]][license-url]
 [![Issues][issues-shield]][issues-url]
+[![NuGet][nuget-shield]][nuget-url]
 
 
 
@@ -158,3 +159,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [issues-url]: https://github.com/Yet-another-solution/Blazor.MapLibre/issues
 [license-shield]: https://img.shields.io/github/license/Yet-another-solution/Blazor.MapLibre.svg?style=for-the-badge
 [license-url]: https://github.com/Yet-another-solution/Blazor.MapLibre/blob/master/LICENSE.txt
+[nuget-shield]: https://img.shields.io/nuget/v/Community.Blazor.MapLibre.svg?style=for-the-badge
+[nuget-url]: https://www.nuget.org/packages/Community.Blazor.MapLibre
