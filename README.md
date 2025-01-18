@@ -60,7 +60,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-TBA
+This project should help people working on Blazor projects to use maps more easily.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -69,15 +69,16 @@ TBA
 <!-- GETTING STARTED -->
 ## Getting Started
 
-TBA
-
 ### Prerequisites
 
-TBA
+This project is created on .NET 8 so you need to use this or never version to run it.
 
 ### Installation
 
-TBA
+Install the package:
+```bash
+dotnet add package Community.Blazor.MapLibre
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -86,14 +87,35 @@ TBA
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-TBA
+After the package is installed you can use it with simple:
+```csharp
+<Map />
+```
 
+You can customize the map more with options using `MapOptions.cs`:
+```csharp
+<Map Options="_mapOptions"></Map>
+
+@code
+{
+    private readonly MapOptions _mapOptions = new MapOptions();
+}
+```
 
 
 <!-- ROADMAP -->
 ## Roadmap
+- ✅ Completed  
+- ☑️ Partially implemented
+- ❌ Not started
 
-TBA
+| Feature   | Status |
+|-----------|--------|
+| Map       |        |
+| - Options | ✅       |
+| Events    |        |
+| - on      | ✅       |
+
 
 See the [open issues](https://github.com/Yet-another-solution/Blazor.MapLibre/issues) for a full list of proposed features (and known issues).
 
