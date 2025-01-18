@@ -95,6 +95,8 @@ public partial class Map : ComponentBase, IAsyncDisposable
 
     #endregion
 
+    #region Events
+
     /// <summary>
     /// Registers an event listener for a specified event on the map, optionally scoped to a specific layer.
     /// </summary>
@@ -113,6 +115,8 @@ public partial class Map : ComponentBase, IAsyncDisposable
 
         return new Listener(callback);
     }
+
+    #endregion
 
     #region Methods
 
