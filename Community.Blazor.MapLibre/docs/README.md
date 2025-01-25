@@ -113,11 +113,17 @@ Skibidi mbadada
 This project aims to provide comprehensive mapping features using MapLibre in Blazor projects. Below is the current roadmap:
 
 | Feature          | Status       |
-|-------------------|--------------|
+|------------------|--------------|
 | **Map**          | **✅ Complete** |
 | - Options        | **✅ Complete** |
 | **Events**       |              |
 | - Event Handlers | **☑️ Partial** |
+| **Methods**      | **✅ Complete** |
+| - addControl()   | **✅ Complete** |
+| - addImage()     | **✅ Complete** |
+| - addLayer()     | **✅ Complete** |
+| - addSource()    | **✅ Complete** |
+| - addSprite()    | **✅ Complete** |
 
 ### Legend:
 
