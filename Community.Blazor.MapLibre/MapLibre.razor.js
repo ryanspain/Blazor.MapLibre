@@ -113,6 +113,11 @@ const MapInterop = {
     addSource: (container, id, source) => {
         mapInstances[container].addSource(id, source);
     },
+
+    setSourceData: (container, id, data) => {
+        const source = mapInstances[container].getSource(id);
+        source.setData(data);
+    },
     /**
      * Adds a sprite to the specified map container.
      *
@@ -1010,6 +1015,56 @@ const MapInterop = {
      */
     zoomTo: (container, zoom, options, eventData) => {
         mapInstances[container].zoomTo(zoom, options, eventData);
+    },
+    /**
+     * Perform all applied bulk transactions.
+     * The only purpose of bulk transaction send multiple transactions in one message, reducing the roundtrip time.
+     * Each action in the transaction is performed in the order they are received.
+     * @param {string} container - The map container.
+     * @param {object} data - Options for animation like duration, offset, etc.
+     */
+    executeTransaction: (container, data) => {
+        const map = mapInstances[container];
+        data?.forEach(d => {
+            switch (d.event) {
+                case "addControl":
+                    map.addControl(d.data[0], d.data[1]);
+                    break;
+                case "addImage":
+                    map.addImage(d.data[0], d.data[1], d.data[2]);
+                    break;
+                case "addLayer":
+                    map.addLayer(d.data[0], d.data[1]);
+                    break;
+                case "addSource":
+                    map.addSource(d.data[0], d.data[1]);
+                    break;
+                case "addSprite":
+                    map.addSprite(d.data[0], d.data[1], d.data[2]);
+                    break;
+                case "removeControl":
+                    map.removeControl(d.data[0]);
+                    break;
+                case "removeFeatureState":
+                    map.removeControl(d.data[0], d.data[1]);
+                    break;
+                case "removeImage":
+                    map.removeControl(d.data[0]);
+                    break;
+                case "removeLayer":
+                    map.removeLayer(d.data[0]);
+                    break;
+                case "removeSource":
+                    map.removeSource(d.data[0]);
+                    break;
+                case "removeSprite":
+                    map.removeSource(d.data[0]);
+                    break;
+                default:
+                    console.warn(`Unknown transaction event: ${d.event}`);
+                    throw new Error(`Unknown transaction event: ${d.event}`);
+            }
+        });
     }
 
 }
