@@ -4,6 +4,10 @@ namespace Community.Blazor.MapLibre.Models.Feature;
 
 [JsonDerivedType(typeof(FeatureCollection))]
 [JsonDerivedType(typeof(FeatureFeature))]
+[JsonDerivedType(typeof(LineFeature))]
+[JsonDerivedType(typeof(MultiLineFeature))]
+[JsonDerivedType(typeof(MultiPointFeature))]
+[JsonDerivedType(typeof(MultiPolygonFeature))]
 [JsonDerivedType(typeof(PointFeature))]
 [JsonDerivedType(typeof(PolygonFeature))]
 public interface IFeature
