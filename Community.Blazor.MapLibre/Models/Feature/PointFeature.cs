@@ -9,4 +9,16 @@ public class PointFeature : IFeature
 
     [JsonPropertyName("coordinates")]
     public required double[] Coordinates { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public LngLatBounds GetBounds()
+    {
+        return new LngLatBounds
+        {
+            Southwest = new LngLat(Coordinates[0], Coordinates[1]),
+            Northeast = new LngLat(Coordinates[0], Coordinates[1])
+        };
+    }
 }

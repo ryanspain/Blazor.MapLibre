@@ -6,4 +6,12 @@ public class MultiPolygonFeature : IFeature
 {
     [JsonPropertyName("type")]
     public string Type => "MultiPolygon";
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public LngLatBounds GetBounds()
+    {
+        throw new NotImplementedException();
+    }
 }

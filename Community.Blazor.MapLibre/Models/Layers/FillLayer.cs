@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using Community.Blazor.MapLibre.Converter;
+using OneOf;
 
 namespace Community.Blazor.MapLibre.Models.Layers;
 
@@ -166,7 +169,8 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? FillColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string, JsonArray>))]
+    public OneOf<string, JsonArray>? FillColor { get; set; }
 
     /// <summary>
     /// Specifies the outline color of the fill.

@@ -14,4 +14,6 @@ public interface IFeature
 {
     [JsonPropertyName("type")]
     public string Type { get; }
+
+    public LngLatBounds GetBounds();
 }

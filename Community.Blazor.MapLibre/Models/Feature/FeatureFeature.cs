@@ -12,4 +12,9 @@ public class FeatureFeature : IFeature
 
     [JsonPropertyName("properties")]
     public Dictionary<string, object>? Properties { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public LngLatBounds GetBounds() => Geometry.GetBounds();
 }

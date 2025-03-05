@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using Community.Blazor.MapLibre.Models;
 using Community.Blazor.MapLibre.Models.Camera;
 using Community.Blazor.MapLibre.Models.Control;
+using Community.Blazor.MapLibre.Models.Image;
 using Community.Blazor.MapLibre.Models.Layers;
 using Community.Blazor.MapLibre.Models.Sources;
 using Microsoft.AspNetCore.Components;
@@ -82,11 +83,6 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     [Parameter]
     public virtual string? Class { get; set; } = null;
 
-    [Parameter]
-    public List<SourceKeyValuePair>? Sources { get; set; }
-
-    public record SourceKeyValuePair(string Key, GeoJsonSource Value);
-
     #endregion
 
     /// <summary>
@@ -97,10 +93,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     public async Task OnLoadCallback()
     {
         await OnLoad.InvokeAsync(EventArgs.Empty);
-        _ready = true;
     }
-
-    private bool _ready = false;
 
     #region Setup
 
@@ -119,19 +112,6 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             Options.Container = MapId;
             // Initialize the MapLibre map
             await _jsModule.InvokeVoidAsync("MapInterop.initializeMap", Options, _dotNetObjectReference);
-        }
-
-        if (!_ready)
-        {
-            return;
-        }
-
-        if (Sources is not null)
-        {
-            foreach (var source in Sources)
-            {
-                await SetSourceData(source.Key, source.Value);
-            }
         }
     }
 
@@ -195,7 +175,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="url">The URL pointing to the image resource to be added.</param>
     /// <param name="options">Optional parameters to configure the image, such as pixel ratio or content layout.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public async ValueTask AddImage(string id, string url, object? options = null)
+    public async ValueTask AddImage(string id, string url, StyleImageMetadata? options = null)
     {
         if (_bulkTransaction is not null)
         {

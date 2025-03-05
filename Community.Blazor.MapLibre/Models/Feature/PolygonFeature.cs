@@ -36,4 +36,44 @@ public class PolygonFeature : IFeature
     /// </example>
     /// </summary>
     public required double[][][] Coordinates { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public LngLatBounds GetBounds()
+    {
+        if (Coordinates.Length == 0 || Coordinates[0].Length == 0 || Coordinates[0][0].Length == 0)
+        {
+            return new LngLatBounds
+            {
+                Southwest = new LngLat(0, 0),
+                Northeast = new LngLat(0, 0)
+            };
+        }
+
+        var minLng = double.MaxValue;
+        var minLat = double.MaxValue;
+        var maxLng = double.MinValue;
+        var maxLat = double.MinValue;
+
+        foreach (var group in Coordinates)
+        {
+            foreach (var coordinate in group)
+            {
+                var lng = coordinate[0];
+                var lat = coordinate[1];
+
+                minLng = Math.Min(minLng, lng);
+                minLat = Math.Min(minLat, lat);
+                maxLng = Math.Max(maxLng, lng);
+                maxLat = Math.Max(maxLat, lat);
+            }
+        }
+
+        return new LngLatBounds()
+        {
+            Northeast = new LngLat(maxLng, maxLat),
+            Southwest = new LngLat(minLng, minLat)
+        };
+    }
 }

@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using Community.Blazor.MapLibre.Converter;
+using OneOf;
 
 namespace Community.Blazor.MapLibre.Models.Layers;
 
@@ -83,7 +86,8 @@ public class LineLayerPaint
     /// </summary>
     [JsonPropertyName("line-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? LineColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string, JsonArray>))]
+    public OneOf<string, JsonArray>? LineColor { get; set; }
 
     /// <summary>
     /// The geometry's offset. Values are [x, y] in pixels.
