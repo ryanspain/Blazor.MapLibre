@@ -2,10 +2,10 @@
 
 namespace Community.Blazor.MapLibre.Models.Feature;
 
-public class MultiLineFeature : IFeature
+public class MultiPointGeometry : IGeometry
 {
     [JsonPropertyName("type")]
-    public string Type => "MultiLineString";
+    public string Type => "MultiPoint";
 
     /// <summary>
     /// <inheritdoc/>

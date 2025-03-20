@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json.Nodes;
+using OneOf;
+using System.Text.Json.Serialization;
+using Community.Blazor.MapLibre.Converter;
 
 namespace Community.Blazor.MapLibre.Models.Layers;
 
@@ -32,47 +35,58 @@ public class CircleLayerPaint
 {
     [JsonPropertyName("circle-radius")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? CircleRadius { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? CircleRadius { get; set; }
 
     [JsonPropertyName("circle-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? CircleColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? CircleColor { get; set; }
 
     [JsonPropertyName("circle-blur")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? CircleBlur { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? CircleBlur { get; set; }
 
     [JsonPropertyName("circle-opacity")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? CircleOpacity { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? CircleOpacity { get; set; }
 
     [JsonPropertyName("circle-translate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? CircleTranslate { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? CircleTranslate { get; set; }
 
     [JsonPropertyName("circle-translate-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public MapViewport? CircleTranslateAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<MapViewport>))]
+    public OneOf<MapViewport, JsonArray>? CircleTranslateAnchor { get; set; }
 
     [JsonPropertyName("circle-pitch-scale")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public MapViewport? CirclePitchScale { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<MapViewport>))]
+    public OneOf<MapViewport, JsonArray>? CirclePitchScale { get; set; }
 
     [JsonPropertyName("circle-pitch-alignment")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public MapViewport? CirclePitchAlignment { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<MapViewport>))]
+    public OneOf<MapViewport, JsonArray>? CirclePitchAlignment { get; set; }
 
     [JsonPropertyName("circle-stroke-width")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? CircleStrokeWidth { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? CircleStrokeWidth { get; set; }
 
     [JsonPropertyName("circle-stroke-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? CircleStrokeColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? CircleStrokeColor { get; set; }
 
     [JsonPropertyName("circle-stroke-opacity")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? CircleStrokeOpacity { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? CircleStrokeOpacity { get; set; }
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]

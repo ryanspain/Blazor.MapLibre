@@ -29,7 +29,8 @@ public class LineLayerLayout
     /// </summary>
     [JsonPropertyName("line-cap")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? LineCap { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? LineCap { get; set; }
 
     /// <summary>
     /// The display of lines when joining.
@@ -37,7 +38,8 @@ public class LineLayerLayout
     /// </summary>
     [JsonPropertyName("line-join")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? LineJoin { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? LineJoin { get; set; }
 
     /// <summary>
     /// Used to automatically convert miter joins to bevel joins for sharp angles.
@@ -45,7 +47,8 @@ public class LineLayerLayout
     /// </summary>
     [JsonPropertyName("line-miter-limit")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineMiterLimit { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineMiterLimit { get; set; }
 
     /// <summary>
     /// Used to automatically convert round joins to miter joins for shallow angles.
@@ -53,14 +56,16 @@ public class LineLayerLayout
     /// </summary>
     [JsonPropertyName("line-round-limit")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineRoundLimit { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineRoundLimit { get; set; }
 
     /// <summary>
     /// Sorts features in ascending order based on this value.
     /// </summary>
     [JsonPropertyName("line-sort-key")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineSortKey { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineSortKey { get; set; }
 
     /// <summary>
     /// Whether this layer is displayed.
@@ -68,7 +73,8 @@ public class LineLayerLayout
     /// </summary>
     [JsonPropertyName("visibility")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? Visibility { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? Visibility { get; set; }
 }
 
 public class LineLayerPaint
@@ -79,14 +85,15 @@ public class LineLayerPaint
     /// </summary>
     [JsonPropertyName("line-opacity")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineOpacity { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineOpacity { get; set; }
 
     /// <summary>
     /// The color with which the line will be drawn. Defaults to #000000.
     /// </summary>
     [JsonPropertyName("line-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonConverter(typeof(OneOfJsonConverter<string, JsonArray>))]
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
     public OneOf<string, JsonArray>? LineColor { get; set; }
 
     /// <summary>
@@ -94,7 +101,8 @@ public class LineLayerPaint
     /// </summary>
     [JsonPropertyName("line-translate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? LineTranslate { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? LineTranslate { get; set; }
 
     /// <summary>
     /// Controls the frame of reference for line-translate.
@@ -102,54 +110,62 @@ public class LineLayerPaint
     /// </summary>
     [JsonPropertyName("line-translate-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? LineTranslateAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? LineTranslateAnchor { get; set; }
 
     /// <summary>
     /// Stroke thickness. Defaults to 1.
     /// </summary>
     [JsonPropertyName("line-width")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineWidth { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineWidth { get; set; }
 
     /// <summary>
     /// Draws a line casing outside of a line's actual path. Defaults to 0.
     /// </summary>
     [JsonPropertyName("line-gap-width")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineGapWidth { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineGapWidth { get; set; }
 
     /// <summary>
     /// The line's offset. Defaults to 0.
     /// </summary>
     [JsonPropertyName("line-offset")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineOffset { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineOffset { get; set; }
 
     /// <summary>
     /// Blur applied to the line, in pixels. Defaults to 0.
     /// </summary>
     [JsonPropertyName("line-blur")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? LineBlur { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? LineBlur { get; set; }
 
     /// <summary>
     /// Specifies the lengths of the alternating dashes and gaps that form the dash pattern.
     /// </summary>
     [JsonPropertyName("line-dasharray")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? LineDasharray { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? LineDasharray { get; set; }
 
     /// <summary>
     /// Name of image in sprite to use for drawing image lines.
     /// </summary>
     [JsonPropertyName("line-pattern")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? LinePattern { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? LinePattern { get; set; }
 
     /// <summary>
     /// Defines a gradient with which to color a line feature.
     /// </summary>
     [JsonPropertyName("line-gradient")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? LineGradient { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? LineGradient { get; set; }
 }

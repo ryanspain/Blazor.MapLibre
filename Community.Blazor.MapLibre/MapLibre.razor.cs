@@ -111,7 +111,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             // Just making sure the Container is being seeded on Create
             Options.Container = MapId;
             // Initialize the MapLibre map
-            await _jsModule.InvokeVoidAsync("MapInterop.initializeMap", Options, _dotNetObjectReference);
+            await _jsModule.InvokeVoidAsync("initializeMap", Options, _dotNetObjectReference);
         }
     }
 
@@ -143,7 +143,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         var reference = DotNetObjectReference.Create(callback);
         _references.TryAdd(Guid.NewGuid(), reference);
 
-        await _jsModule.InvokeVoidAsync("MapInterop.on", MapId, eventName, reference, layer);
+        await _jsModule.InvokeVoidAsync("on", MapId, eventName, reference, layer);
 
         return new Listener(callback);
     }
@@ -165,7 +165,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("addControl", controlType.ToString(), options);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.addControl", MapId, controlType.ToString(), options);
+        await _jsModule.InvokeVoidAsync("addControl", MapId, controlType.ToString(), options);
     }
 
     /// <summary>
@@ -182,7 +182,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("addImage", id, url, options);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.addImage", MapId, id, url, options);
+        await _jsModule.InvokeVoidAsync("addImage", MapId, id, url, options);
     }
 
     /// <summary>
@@ -198,7 +198,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("addLayer", layer, beforeId);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.addLayer", MapId, layer, beforeId);
+        await _jsModule.InvokeVoidAsync("addLayer", MapId, layer, beforeId);
     }
 
     /// <summary>
@@ -214,7 +214,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("addSource", id, source);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.addSource", MapId, id, source);
+        await _jsModule.InvokeVoidAsync("addSource", MapId, id, source);
     }
 
     public async ValueTask SetSourceData(string id, GeoJsonSource source)
@@ -224,7 +224,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("setSourceData", id, source.Data);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.setSourceData", MapId, id, source.Data);
+        await _jsModule.InvokeVoidAsync("setSourceData", MapId, id, source.Data);
     }
 
     /// <summary>
@@ -241,7 +241,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("addSprite", id, url, options);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.addSprite", MapId, id, url, options);
+        await _jsModule.InvokeVoidAsync("addSprite", MapId, id, url, options);
     }
 
     /// <summary>
@@ -250,7 +250,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <returns>A task that resolves to a boolean indicating whether the tiles are completely loaded.</returns>
     public async ValueTask<bool> AreTilesLoaded()
     {
-        return await _jsModule.InvokeAsync<bool>("MapInterop.areTilesLoaded", MapId);
+        return await _jsModule.InvokeAsync<bool>("areTilesLoaded", MapId);
     }
 
     /// <summary>
@@ -267,7 +267,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         double cameraAltitude, double bearing, double pitch, double? roll = null)
     {
         return await _jsModule.InvokeAsync<CameraOptions>(
-            "MapInterop.calculateCameraOptionsFromCameraLngLatAltRotation",
+            "calculateCameraOptionsFromCameraLngLatAltRotation",
             MapId, cameraLngLat, cameraAltitude, bearing, pitch, roll);
     }
 
@@ -281,7 +281,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <returns>A task representing the asynchronous operation that provides the calculated CameraOptions.</returns>
     public async ValueTask<CameraOptions> CalculateCameraOptionsFromTo(LngLat from, double altitudeFrom, LngLat to,
         double? altitudeTo = null) =>
-        await _jsModule.InvokeAsync<CameraOptions>("MapInterop.calculateCameraOptionsFromTo", MapId, from, altitudeFrom,
+        await _jsModule.InvokeAsync<CameraOptions>("calculateCameraOptionsFromTo", MapId, from, altitudeFrom,
             to, altitudeTo);
 
     /// <summary>
@@ -291,7 +291,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">Optional parameters to customize the calculation.</param>
     /// <returns>A task that represents the asynchronous operation, containing the resulting center, zoom, and bearing.</returns>
     public async ValueTask<CenterZoomBearing> CameraForBounds(LngLatBounds bounds, object? options = null) =>
-        await _jsModule.InvokeAsync<CenterZoomBearing>("MapInterop.cameraForBounds", MapId, bounds, options);
+        await _jsModule.InvokeAsync<CenterZoomBearing>("cameraForBounds", MapId, bounds, options);
 
     /// <summary>
     /// Smoothly transitions the camera's view to the specified target, animating parameters such as
@@ -309,7 +309,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </param>
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async ValueTask EaseTo(EaseToOptions options, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.easeTo", MapId, options, eventData);
+        await _jsModule.InvokeVoidAsync("easeTo", MapId, options, eventData);
 
     /// <summary>
     /// Pans and zooms the map to contain its visible area within the specified geographical bounds. This function will also reset the map's bearing to 0 if bearing is nonzero.
@@ -319,7 +319,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="eventData">Additional event data associated with the operation, if any.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async ValueTask FitBounds(LngLatBounds bounds, FitBoundOptions? options = null, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.fitBounds", MapId, bounds, options, eventData);
+        await _jsModule.InvokeVoidAsync("fitBounds", MapId, bounds, options, eventData);
 
     /// <summary>
     /// Pans, rotates, and zooms the map to fit the bounding box formed by two given screen points
@@ -347,7 +347,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </example>
     public async ValueTask FitScreenCoordinates(PointLike p0, PointLike p1, double bearing,
         FitBoundOptions? options = null, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.fitScreenCoordinates", MapId, p0, p1, bearing, options, eventData);
+        await _jsModule.InvokeVoidAsync("fitScreenCoordinates", MapId, p0, p1, bearing, options, eventData);
 
     /// <summary>
     /// Smoothly transitions the map by animating changes to the center, zoom, bearing, pitch, and roll properties.
@@ -379,49 +379,49 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </code>
     /// </example>
     public async ValueTask FlyTo(FlyToOptions options, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.flyTo", MapId, options, eventData);
+        await _jsModule.InvokeVoidAsync("flyTo", MapId, options, eventData);
 
     /// <summary>
     /// Gets the bearing of the map's current view direction.
     /// </summary>
     /// <returns>Returns the map's current bearing, a value in degrees.</returns>
     public async ValueTask<double> GetBearing() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getBearing", MapId);
+        await _jsModule.InvokeAsync<double>("getBearing", MapId);
 
     /// <summary>
     /// Gets the geographical bounds visible in the current viewport.
     /// </summary>
     /// <returns>The <see cref="LngLatBounds"/> object representing the visible geographical bounds.</returns>
     public async ValueTask<LngLatBounds> GetBounds() =>
-        await _jsModule.InvokeAsync<LngLatBounds>("MapInterop.getBounds", MapId);
+        await _jsModule.InvokeAsync<LngLatBounds>("getBounds", MapId);
 
     /// <summary>
     /// Gets the elevation of the camera target with respect to the terrain.
     /// </summary>
     /// <returns>The elevation of the center point in meters.</returns>
     public async ValueTask<double> GetCameraTargetElevation() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getCameraTargetElevation", MapId);
+        await _jsModule.InvokeAsync<double>("getCameraTargetElevation", MapId);
 
     /// <summary>
     /// Gets a reference to the map's HTML canvas element.
     /// </summary>
     /// <returns>A JSObjectReference representing the canvas element.</returns>
     public async ValueTask<IJSObjectReference> GetCanvas() =>
-        await _jsModule.InvokeAsync<IJSObjectReference>("MapInterop.getCanvas", MapId);
+        await _jsModule.InvokeAsync<IJSObjectReference>("getCanvas", MapId);
 
     /// <summary>
     /// Gets the container of the map's canvas element.
     /// </summary>
     /// <returns>A JSObjectReference representing the canvas container.</returns>
     public async ValueTask<IJSObjectReference> GetCanvasContainer() =>
-        await _jsModule.InvokeAsync<IJSObjectReference>("MapInterop.getCanvasContainer", MapId);
+        await _jsModule.InvokeAsync<IJSObjectReference>("getCanvasContainer", MapId);
 
     /// <summary>
     /// Gets the geographical center of the current map view.
     /// </summary>
     /// <returns>A <see cref="LngLat"/> representing the center of the viewport.</returns>
     public async ValueTask<LngLat> GetCenter() =>
-        await _jsModule.InvokeAsync<LngLat>("MapInterop.getCenter", MapId);
+        await _jsModule.InvokeAsync<LngLat>("getCenter", MapId);
 
     /// <summary>
     /// Returns the value of centerClampedToGround.
@@ -431,21 +431,21 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <returns></returns>
     public async ValueTask<bool> GetCenterClampedToGround() =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.getCenterClampedToGround", MapId);
+        await _jsModule.InvokeAsync<bool>("getCenterClampedToGround", MapId);
 
     /// <summary>
     /// Returns the elevation of the map's center point.
     /// </summary>
     /// <returns></returns>
     public async ValueTask<double> GetCenterElevation() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getCenterElevation", MapId);
+        await _jsModule.InvokeAsync<double>("getCenterElevation", MapId);
 
     /// <summary>
     /// Returns the map's containing HTML element.
     /// </summary>
     /// <returns>A task that represents the asynchronous operation, resulting in a JavaScript object reference to the container element.</returns>
     public async ValueTask<IJSObjectReference> GetContainer() =>
-        await _jsModule.InvokeAsync<IJSObjectReference>("MapInterop.getContainer", MapId);
+        await _jsModule.InvokeAsync<IJSObjectReference>("getContainer", MapId);
 
     /// <summary>
     /// Gets the state of a feature. A feature's state is a set of user-defined key-value pairs that are assigned to a
@@ -455,7 +455,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="feature">The feature whose state is to be retrieved.</param>
     /// <returns>A task representing the asynchronous operation, with the result containing the state of the feature as an object.</returns>
     public async ValueTask<object> GetFeatureState(object feature) =>
-        await _jsModule.InvokeAsync<object>("MapInterop.getFeatureState", MapId, feature);
+        await _jsModule.InvokeAsync<object>("getFeatureState", MapId, feature);
 
     /// <summary>
     /// Returns the filter applied to the specified style layer.
@@ -463,14 +463,14 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="layerId"></param>
     /// <returns></returns>
     public async ValueTask<string> GetFilter(string layerId) =>
-        await _jsModule.InvokeAsync<string>("MapInterop.getFilter", MapId, layerId);
+        await _jsModule.InvokeAsync<string>("getFilter", MapId, layerId);
 
     /// <summary>
     /// Returns the value of the style's glyphs URL
     /// </summary>
     /// <returns></returns>
     public async ValueTask<string> GetGlyphs() =>
-        await _jsModule.InvokeAsync<string>("MapInterop.getGlyphs", MapId);
+        await _jsModule.InvokeAsync<string>("getGlyphs", MapId);
 
     /// <summary>
     /// Returns an image, specified by ID, currently available in the map. This includes both images from the style's
@@ -479,7 +479,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="id"></param>
     /// <returns></returns>
     public async ValueTask<string> GetImage(string id) =>
-        await _jsModule.InvokeAsync<string>("MapInterop.getImage", MapId, id);
+        await _jsModule.InvokeAsync<string>("getImage", MapId, id);
 
     /// <summary>
     /// Returns the layer with the specified ID in the map's style.
@@ -487,14 +487,14 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="id"></param>
     /// <returns></returns>
     public async ValueTask<object> GetLayer(string id) =>
-        await _jsModule.InvokeAsync<object>("MapInterop.getLayer", MapId, id);
+        await _jsModule.InvokeAsync<object>("getLayer", MapId, id);
 
     /// <summary>
     /// Return the ids of all layers currently in the style, including custom layers, in order.
     /// </summary>
     /// <returns></returns>
     public async ValueTask<string[]> GetLayersOrder() =>
-        await _jsModule.InvokeAsync<string[]>("MapInterop.getLayersOrder", MapId);
+        await _jsModule.InvokeAsync<string[]>("getLayersOrder", MapId);
 
     /// <summary>
     /// Returns the value of a layout property in the specified style layer.
@@ -503,56 +503,56 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="name"></param>
     /// <returns></returns>
     public async ValueTask<object> GetLayoutProperty(string layerId, string name) =>
-        await _jsModule.InvokeAsync<object>("MapInterop.getLayoutProperty", MapId, layerId, name);
+        await _jsModule.InvokeAsync<object>("getLayoutProperty", MapId, layerId, name);
 
     /// <summary>
     /// Retrieves the current light settings of the map.
     /// </summary>
     /// <returns>An object representing the map's light settings.</returns>
     public async ValueTask<object> GetLight() =>
-        await _jsModule.InvokeAsync<object>("MapInterop.getLight", MapId);
+        await _jsModule.InvokeAsync<object>("getLight", MapId);
 
     /// <summary>
     /// Retrieves the maximum geographical bounds the map is constrained to.
     /// </summary>
     /// <returns>An object representing the map's maximum bounds or null if not set.</returns>
     public async ValueTask<object?> GetMaxBounds() =>
-        await _jsModule.InvokeAsync<object?>("MapInterop.getMaxBounds", MapId);
+        await _jsModule.InvokeAsync<object?>("getMaxBounds", MapId);
 
     /// <summary>
     /// Retrieves the map's maximum allowable pitch.
     /// </summary>
     /// <returns>The maximum allowable pitch in degrees.</returns>
     public async ValueTask<double> GetMaxPitch() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getMaxPitch", MapId);
+        await _jsModule.InvokeAsync<double>("getMaxPitch", MapId);
 
     /// <summary>
     /// Retrieves the map's maximum allowable zoom level.
     /// </summary>
     /// <returns>The maximum zoom level allowed by the map.</returns>
     public async ValueTask<double> GetMaxZoom() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getMaxZoom", MapId);
+        await _jsModule.InvokeAsync<double>("getMaxZoom", MapId);
 
     /// <summary>
     /// Retrieves the map's minimum allowable pitch.
     /// </summary>
     /// <returns>The minimum allowable pitch in degrees.</returns>
     public async ValueTask<double> GetMinPitch() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getMinPitch", MapId);
+        await _jsModule.InvokeAsync<double>("getMinPitch", MapId);
 
     /// <summary>
     /// Retrieves the map's minimum allowable zoom level.
     /// </summary>
     /// <returns>The minimum zoom level allowed by the map.</returns>
     public async ValueTask<double> GetMinZoom() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getMinZoom", MapId);
+        await _jsModule.InvokeAsync<double>("getMinZoom", MapId);
 
     /// <summary>
     /// Retrieves the current padding applied to the map's viewport.
     /// </summary>
     /// <returns>An object representing padding options applied to the map.</returns>
     public async ValueTask<object> GetPadding() =>
-        await _jsModule.InvokeAsync<object>("MapInterop.getPadding", MapId);
+        await _jsModule.InvokeAsync<object>("getPadding", MapId);
 
     /// <summary>
     /// Retrieves the value of a specific paint property of a specified layer.
@@ -561,49 +561,49 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="name">The name of the paint property.</param>
     /// <returns>The value of the specified paint property.</returns>
     public async ValueTask<object?> GetPaintProperty(string layerId, string name) =>
-        await _jsModule.InvokeAsync<object?>("MapInterop.getPaintProperty", MapId, layerId, name);
+        await _jsModule.InvokeAsync<object?>("getPaintProperty", MapId, layerId, name);
 
     /// <summary>
     /// Retrieves the current pitch (tilt) of the map in degrees.
     /// </summary>
     /// <returns>The map's current pitch value.</returns>
     public async ValueTask<double> GetPitch() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getPitch", MapId);
+        await _jsModule.InvokeAsync<double>("getPitch", MapId);
 
     /// <summary>
     /// Retrieves the map's pixel ratio.
     /// </summary>
     /// <returns>The pixel ratio of the map.</returns>
     public async ValueTask<double> GetPixelRatio() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getPixelRatio", MapId);
+        await _jsModule.InvokeAsync<double>("getPixelRatio", MapId);
 
     /// <summary>
     /// Retrieves the projection specification of the map.
     /// </summary>
     /// <returns>An object representing the map's projection specification.</returns>
     public async ValueTask<object> GetProjection() =>
-        await _jsModule.InvokeAsync<object>("MapInterop.getProjection", MapId);
+        await _jsModule.InvokeAsync<object>("getProjection", MapId);
 
     /// <summary>
     /// Returns the state of whether multiple world copies are rendered or not.
     /// </summary>
     /// <returns>True if multiple world copies are rendered; otherwise, false.</returns>
     public async ValueTask<bool> GetRenderWorldCopies() =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.getRenderWorldCopies", MapId);
+        await _jsModule.InvokeAsync<bool>("getRenderWorldCopies", MapId);
 
     /// <summary>
     /// Retrieves the current roll angle of the map in degrees.
     /// </summary>
     /// <returns>The current roll value of the map.</returns>
     public async ValueTask<double> GetRoll() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getRoll", MapId);
+        await _jsModule.InvokeAsync<double>("getRoll", MapId);
 
     /// <summary>
     /// Retrieves the sky properties applied to the map style.
     /// </summary>
     /// <returns>An object representing the sky properties of the map.</returns>
     public async ValueTask<object?> GetSky() =>
-        await _jsModule.InvokeAsync<object?>("MapInterop.getSky", MapId);
+        await _jsModule.InvokeAsync<object?>("getSky", MapId);
 
     /// <summary>
     /// Retrieves a source from the map's style by its ID.
@@ -611,42 +611,42 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="id">The ID of the source to retrieve.</param>
     /// <returns>The source object if found, or null if not found.</returns>
     public async ValueTask<object?> GetSource(string id) =>
-        await _jsModule.InvokeAsync<object?>("MapInterop.getSource", MapId, id);
+        await _jsModule.InvokeAsync<object?>("getSource", MapId, id);
 
     /// <summary>
     /// Retrieves the style's sprite as a list of objects.
     /// </summary>
     /// <returns>A list of objects representing the style's sprite.</returns>
     public async ValueTask<object[]> GetSprite() =>
-        await _jsModule.InvokeAsync<object[]>("MapInterop.getSprite", MapId);
+        await _jsModule.InvokeAsync<object[]>("getSprite", MapId);
 
     /// <summary>
     /// Retrieves the map's style specification.
     /// </summary>
     /// <returns>An object representing the style specification of the map.</returns>
     public async ValueTask<object> GetStyle() =>
-        await _jsModule.InvokeAsync<object>("MapInterop.getStyle", MapId);
+        await _jsModule.InvokeAsync<object>("getStyle", MapId);
 
     /// <summary>
     /// Retrieves the terrain options if terrain is loaded.
     /// </summary>
     /// <returns>An object representing terrain options, or null if not loaded.</returns>
     public async ValueTask<object?> GetTerrain() =>
-        await _jsModule.InvokeAsync<object?>("MapInterop.getTerrain", MapId);
+        await _jsModule.InvokeAsync<object?>("getTerrain", MapId);
 
     /// <summary>
     /// Retrieves the map's current vertical field of view in degrees.
     /// </summary>
     /// <returns>The map's vertical field of view in degrees.</returns>
     public async ValueTask<double> GetVerticalFieldOfView() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getVerticalFieldOfView", MapId);
+        await _jsModule.InvokeAsync<double>("getVerticalFieldOfView", MapId);
 
     /// <summary>
     /// Retrieves the map's current zoom level.
     /// </summary>
     /// <returns>The current zoom level of the map.</returns>
     public async ValueTask<double> GetZoom() =>
-        await _jsModule.InvokeAsync<double>("MapInterop.getZoom", MapId);
+        await _jsModule.InvokeAsync<double>("getZoom", MapId);
 
     /// <summary>
     /// Checks if a specific control exists on the map.
@@ -654,7 +654,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="control">The control instance to check for.</param>
     /// <returns>True if the control exists on the map; otherwise, false.</returns>
     public async ValueTask<bool> HasControl(object control) =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.hasControl", MapId, control);
+        await _jsModule.InvokeAsync<bool>("hasControl", MapId, control);
 
     /// <summary>
     /// Checks whether a specific image ID exists in the map's style.
@@ -662,21 +662,21 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="id">The image ID to check.</param>
     /// <returns>True if the image exists; otherwise, false.</returns>
     public async ValueTask<bool> HasImage(string id) =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.hasImage", MapId, id);
+        await _jsModule.InvokeAsync<bool>("hasImage", MapId, id);
 
     /// <summary>
     /// Determines if the map is currently moving.
     /// </summary>
     /// <returns>True if the map is moving; otherwise, false.</returns>
     public async ValueTask<bool> IsMoving() =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.isMoving", MapId);
+        await _jsModule.InvokeAsync<bool>("isMoving", MapId);
 
     /// <summary>
     /// Determines if the map is currently rotating.
     /// </summary>
     /// <returns>True if the map is rotating; otherwise, false.</returns>
     public async ValueTask<bool> IsRotating() =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.isRotating", MapId);
+        await _jsModule.InvokeAsync<bool>("isRotating", MapId);
 
     /// <summary>
     /// Determines if a source with the given ID is loaded in the map.
@@ -684,21 +684,21 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="id">The ID of the source to check.</param>
     /// <returns>True if the source is loaded; otherwise, false.</returns>
     public async ValueTask<bool> IsSourceLoaded(string id) =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.isSourceLoaded", MapId, id);
+        await _jsModule.InvokeAsync<bool>("isSourceLoaded", MapId, id);
 
     /// <summary>
     /// Determines if the map's style is fully loaded.
     /// </summary>
     /// <returns>True if the style is fully loaded; otherwise, false.</returns>
     public async ValueTask<bool> IsStyleLoaded() =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.isStyleLoaded", MapId);
+        await _jsModule.InvokeAsync<bool>("isStyleLoaded", MapId);
 
     /// <summary>
     /// Determines if the map is currently zooming.
     /// </summary>
     /// <returns>True if the map is zooming; otherwise, false.</returns>
     public async ValueTask<bool> IsZooming() =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.isZooming", MapId);
+        await _jsModule.InvokeAsync<bool>("isZooming", MapId);
 
     /// <summary>
     /// Updates the map view by changing the center, zoom, bearing, pitch, or roll without animation.
@@ -706,7 +706,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">The new view options.</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask JumpTo(object options, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.jumpTo", MapId, options, eventData);
+        await _jsModule.InvokeVoidAsync("jumpTo", MapId, options, eventData);
 
     /// <summary>
     /// Determines if there are any registered listeners for a given event type on the map.
@@ -714,21 +714,21 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="type">The event type to check.</param>
     /// <returns>True if a listener exists for the given event type; otherwise, false.</returns>
     public async ValueTask<bool> Listens(string type) =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.listens", MapId, type);
+        await _jsModule.InvokeAsync<bool>("listens", MapId, type);
 
     /// <summary>
     /// Lists all image IDs available in the map's style.
     /// </summary>
     /// <returns>An array of image IDs available in the style.</returns>
     public async ValueTask<string[]> ListImages() =>
-        await _jsModule.InvokeAsync<string[]>("MapInterop.listImages", MapId);
+        await _jsModule.InvokeAsync<string[]>("listImages", MapId);
 
     /// <summary>
     /// Checks if the map is fully loaded.
     /// </summary>
     /// <returns>True if the map is fully loaded; otherwise, false.</returns>
     public async ValueTask<bool> Loaded() =>
-        await _jsModule.InvokeAsync<bool>("MapInterop.loaded", MapId);
+        await _jsModule.InvokeAsync<bool>("loaded", MapId);
 
     /// <summary>
     /// Loads an image from an external URL and returns it.
@@ -736,7 +736,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="url">The URL of the image to load.</param>
     /// <returns>An object containing the loaded image.</returns>
     public async ValueTask<object> LoadImage(string url) =>
-        await _jsModule.InvokeAsync<object>("MapInterop.loadImage", MapId, url);
+        await _jsModule.InvokeAsync<object>("loadImage", MapId, url);
 
     /// <summary>
     /// Moves a layer to a different z-position in the style.
@@ -744,7 +744,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="id">The ID of the layer to move.</param>
     /// <param name="beforeId">The ID of the target layer to place the layer before.</param>
     public async ValueTask MoveLayer(string id, string beforeId) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.moveLayer", MapId, id, beforeId);
+        await _jsModule.InvokeVoidAsync("moveLayer", MapId, id, beforeId);
 
     /// <summary>
     /// Pans the map by a specified offset.
@@ -753,7 +753,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">Additional pan options (e.g., animation parameters).</param>
     /// <param name="eventData">Optional event data associated with the operation.</param>
     public async ValueTask PanBy(object offset, object? options = null, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.panBy", MapId, offset, options, eventData);
+        await _jsModule.InvokeVoidAsync("panBy", MapId, offset, options, eventData);
 
     /// <summary>
     /// Pans the map to the given geographical location.
@@ -762,7 +762,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">Additional options (e.g., duration).</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask PanTo(object lngLat, object? options = null, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.panTo", MapId, lngLat, options, eventData);
+        await _jsModule.InvokeVoidAsync("panTo", MapId, lngLat, options, eventData);
 
     /// <summary>
     /// Projects geographical coordinates to pixel coordinates in the current map view.
@@ -770,7 +770,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="lngLat">The geographical coordinates to project.</param>
     /// <returns>The projected point as pixel coordinates.</returns>
     public async ValueTask<object> Project(object lngLat) =>
-        await _jsModule.InvokeAsync<object>("MapInterop.project", MapId, lngLat);
+        await _jsModule.InvokeAsync<object>("project", MapId, lngLat);
 
     /// <summary>
     /// Queries the map for rendered features within a specified geometry or options.
@@ -779,7 +779,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">Additional query options (e.g., layer IDs).</param>
     /// <returns>An array of features matching the query.</returns>
     public async ValueTask<object[]> QueryRenderedFeatures(object query, object? options = null) =>
-        await _jsModule.InvokeAsync<object[]>("MapInterop.queryRenderedFeatures", MapId, query, options);
+        await _jsModule.InvokeAsync<object[]>("queryRenderedFeatures", MapId, query, options);
 
     /// <summary>
     /// Queries features from a source.
@@ -788,7 +788,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="parameters">Query parameters as an object.</param>
     /// <returns>An array of query results.</returns>
     public async ValueTask<object[]> QuerySourceFeatures(string sourceId, object parameters) =>
-        await _jsModule.InvokeAsync<object[]>("MapInterop.querySourceFeatures", MapId, sourceId, parameters);
+        await _jsModule.InvokeAsync<object[]>("querySourceFeatures", MapId, sourceId, parameters);
 
     /// <summary>
     /// Queries terrain elevation at the given location.
@@ -796,20 +796,20 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="lngLat">An array with longitude and latitude coordinates.</param>
     /// <returns>The elevation in meters at the given location.</returns>
     public async ValueTask<double> QueryTerrainElevation(object lngLat) =>
-        await _jsModule.InvokeAsync<double>("MapInterop.queryTerrainElevation", MapId, lngLat);
+        await _jsModule.InvokeAsync<double>("queryTerrainElevation", MapId, lngLat);
 
     /// <summary>
     /// Forces a redraw of the map.
     /// </summary>
     public async ValueTask Redraw() =>
-        await _jsModule.InvokeVoidAsync("MapInterop.redraw", MapId);
+        await _jsModule.InvokeVoidAsync("redraw", MapId);
 
     /// <summary>
     /// Cleans up internal resources associated with the map and removes it.
     /// </summary>
     public async ValueTask Remove()
     {
-        await _jsModule.InvokeVoidAsync("MapInterop.remove", MapId);
+        await _jsModule.InvokeVoidAsync("remove", MapId);
     }
 
     /// <summary>
@@ -823,7 +823,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("removeControl", control);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.removeControl", MapId, control);
+        await _jsModule.InvokeVoidAsync("removeControl", MapId, control);
     }
 
     /// <summary>
@@ -838,7 +838,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("removeFeatureState", target, key);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.removeFeatureState", MapId, target, key);
+        await _jsModule.InvokeVoidAsync("removeFeatureState", MapId, target, key);
     }
 
     /// <summary>
@@ -852,7 +852,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("removeImage", id);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.removeImage", MapId, id);
+        await _jsModule.InvokeVoidAsync("removeImage", MapId, id);
     }
 
     /// <summary>
@@ -866,7 +866,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("removeLayer", id);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.removeLayer", MapId, id);
+        await _jsModule.InvokeVoidAsync("removeLayer", MapId, id);
     }
 
     /// <summary>
@@ -880,7 +880,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("removeSource", id);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.removeSource", MapId, id);
+        await _jsModule.InvokeVoidAsync("removeSource", MapId, id);
     }
 
     /// <summary>
@@ -894,7 +894,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             _bulkTransaction.Add("removeSprite", id);
             return;
         }
-        await _jsModule.InvokeVoidAsync("MapInterop.removeSprite", MapId, id);
+        await _jsModule.InvokeVoidAsync("removeSprite", MapId, id);
     }
 
     /// <summary>
@@ -903,7 +903,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">Animation options.</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask ResetNorth(object? options = null, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.resetNorth", MapId, options, eventData);
+        await _jsModule.InvokeVoidAsync("resetNorth", MapId, options, eventData);
 
     /// <summary>
     /// Resets the map’s north and pitch angles with an animated transition.
@@ -911,7 +911,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">Animation options.</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask ResetNorthPitch(object? options = null, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.resetNorthPitch", MapId, options, eventData);
+        await _jsModule.InvokeVoidAsync("resetNorthPitch", MapId, options, eventData);
 
     /// <summary>
     /// Resizes the map to fit its container dimensions.
@@ -919,7 +919,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="eventData">Optional event data.</param>
     /// <param name="constrainTransform">Whether to constrain the transform.</param>
     public async ValueTask Resize(object? eventData = null, bool constrainTransform = true) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.resize", MapId, eventData, constrainTransform);
+        await _jsModule.InvokeVoidAsync("resize", MapId, eventData, constrainTransform);
 
     /// <summary>
     /// Rotates the map to the specified bearing.
@@ -928,7 +928,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">Optional animation options.</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask RotateTo(double bearing, object? options = null, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.rotateTo", MapId, bearing, options, eventData);
+        await _jsModule.InvokeVoidAsync("rotateTo", MapId, bearing, options, eventData);
 
     /// <summary>
     /// Sets the map's bearing (rotation).
@@ -936,7 +936,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="bearing">The bearing in degrees.</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask SetBearing(double bearing, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.setBearing", MapId, bearing, eventData);
+        await _jsModule.InvokeVoidAsync("setBearing", MapId, bearing, eventData);
 
     /// <summary>
     /// Sets the map's geographical center.
@@ -944,14 +944,14 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="center">The geographical center coordinates [longitude, latitude].</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask SetCenter(object center, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.setCenter", MapId, center, eventData);
+        await _jsModule.InvokeVoidAsync("setCenter", MapId, center, eventData);
 
     /// <summary>
     /// Sets whether the map's center is clamped to the ground.
     /// </summary>
     /// <param name="centerClampedToGround">Whether to clamp the map's center to the ground.</param>
     public async ValueTask SetCenterClampedToGround(bool centerClampedToGround) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.setCenterClampedToGround", MapId, centerClampedToGround);
+        await _jsModule.InvokeVoidAsync("setCenterClampedToGround", MapId, centerClampedToGround);
 
     /// <summary>
     /// Sets the elevation of the map's center point.
@@ -959,7 +959,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="elevation">The elevation in meters.</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask SetCenterElevation(double elevation, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.setCenterElevation", MapId, elevation, eventData);
+        await _jsModule.InvokeVoidAsync("setCenterElevation", MapId, elevation, eventData);
 
     /// <summary>
     /// Updates the state of a specific feature on the map.
@@ -967,7 +967,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="feature">The feature identifier object.</param>
     /// <param name="state">The state properties to apply to the feature.</param>
     public async ValueTask SetFeatureState(object feature, object state) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.setFeatureState", MapId, feature, state);
+        await _jsModule.InvokeVoidAsync("setFeatureState", MapId, feature, state);
 
     /// <summary>
     /// Sets a zoom level for the map.
@@ -975,7 +975,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="zoom">The desired zoom level (0–20).</param>
     /// <param name="eventData">Optional event data.</param>
     public async ValueTask SetZoom(double zoom, object? eventData = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.setZoom", MapId, zoom, eventData);
+        await _jsModule.InvokeVoidAsync("setZoom", MapId, zoom, eventData);
 
     /// <summary>
     /// Adjusts the map's style to a new configuration or URL.
@@ -983,13 +983,13 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="style">The style configuration object or URL.</param>
     /// <param name="options">Optional parameters for the style application.</param>
     public async ValueTask SetStyle(object style, object? options = null) =>
-        await _jsModule.InvokeVoidAsync("MapInterop.setStyle", MapId, style, options);
+        await _jsModule.InvokeVoidAsync("setStyle", MapId, style, options);
 
     /// <summary>
     /// Stops any animated transition currently underway on the map.
     /// </summary>
     public async ValueTask Stop() =>
-        await _jsModule.InvokeVoidAsync("MapInterop.stop", MapId);
+        await _jsModule.InvokeVoidAsync("stop", MapId);
 
     /// <summary>
     /// Converts pixel coordinates to geographical coordinates.
@@ -997,7 +997,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="point">The pixel coordinates [x, y].</param>
     /// <returns>Geographical coordinates [longitude, latitude].</returns>
     public async ValueTask<object> Unproject(object point) =>
-        await _jsModule.InvokeAsync<object>("MapInterop.unproject", MapId, point);
+        await _jsModule.InvokeAsync<object>("unproject", MapId, point);
 
     /// <summary>
     /// Updates an existing image in the map's sprite.
@@ -1006,7 +1006,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="image">The new image data to update.</param>
     public async ValueTask UpdateImage(string id, object image)
     {
-        await _jsModule.InvokeVoidAsync("MapInterop.updateImage", MapId, id, image);
+        await _jsModule.InvokeVoidAsync("updateImage", MapId, id, image);
     }
 
     /// <summary>
@@ -1016,7 +1016,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="eventData">Additional event data (optional).</param>
     public async ValueTask ZoomIn(object? options = null, object? eventData = null)
     {
-        await _jsModule.InvokeVoidAsync("MapInterop.zoomIn", MapId, options, eventData);
+        await _jsModule.InvokeVoidAsync("zoomIn", MapId, options, eventData);
     }
 
     /// <summary>
@@ -1026,7 +1026,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="eventData">Additional event data (optional).</param>
     public async ValueTask ZoomOut(object? options = null, object? eventData = null)
     {
-        await _jsModule.InvokeVoidAsync("MapInterop.zoomOut", MapId, options, eventData);
+        await _jsModule.InvokeVoidAsync("zoomOut", MapId, options, eventData);
     }
 
     /// <summary>
@@ -1037,7 +1037,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="eventData">Additional event data (optional).</param>
     public async ValueTask ZoomTo(double zoom, object? options = null, object? eventData = null)
     {
-        await _jsModule.InvokeVoidAsync("MapInterop.zoomTo", MapId, zoom, options, eventData);
+        await _jsModule.InvokeVoidAsync("zoomTo", MapId, zoom, options, eventData);
     }
 
     #endregion
@@ -1070,7 +1070,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             throw new InvalidOperationException("No bulk transaction is in progress.");
         }
 
-        await _jsModule.InvokeVoidAsync("MapInterop.executeTransaction", _bulkTransaction.Transactions);
+        await _jsModule.InvokeVoidAsync("executeTransaction", _bulkTransaction.Transactions);
         _bulkTransaction = null;
     }
 

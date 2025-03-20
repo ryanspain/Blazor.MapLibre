@@ -2,7 +2,7 @@
 
 namespace Community.Blazor.MapLibre.Models.Feature;
 
-public class PolygonFeature : IFeature
+public class PolygonGeometry : IGeometry
 {
     [JsonPropertyName("type")]
     public string Type => "Polygon";

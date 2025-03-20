@@ -2,7 +2,7 @@
 
 namespace Community.Blazor.MapLibre.Models.Feature;
 
-public class LineFeature : IFeature
+public class LineGeometry : IGeometry
 {
     [JsonPropertyName("type")]
     public string Type => "LineString";

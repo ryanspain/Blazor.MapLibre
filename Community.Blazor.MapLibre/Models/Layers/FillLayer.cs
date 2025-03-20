@@ -46,7 +46,8 @@ public class FillLayerLayout
     /// </remarks>
     [JsonPropertyName("fill-sort-key")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? FillSortKey { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? FillSortKey { get; set; }
 
     /// <summary>
     /// Controls whether this layer is displayed.
@@ -71,7 +72,8 @@ public class FillLayerLayout
     /// </remarks>
     [JsonPropertyName("visibility")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? Visibility { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? Visibility { get; set; }
 }
 
 public class FillLayerPaint
@@ -99,7 +101,8 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-antialias")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? FillAntialias { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? FillAntialias { get; set; }
 
     /// <summary>
     /// Specifies the opacity of the entire fill layer.
@@ -134,7 +137,8 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-opacity")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? FillOpacity { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? FillOpacity { get; set; }
 
     /// <summary>
     /// Defines the color of the filled part of this layer.
@@ -169,7 +173,7 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonConverter(typeof(OneOfJsonConverter<string, JsonArray>))]
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
     public OneOf<string, JsonArray>? FillColor { get; set; }
 
     /// <summary>
@@ -209,7 +213,8 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-outline-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? FillOutlineColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? FillOutlineColor { get; set; }
 
     /// <summary>
     /// Specifies the geometry's offset in pixels.
@@ -252,7 +257,8 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-translate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? FillTranslate { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? FillTranslate { get; set; }
 
     /// <summary>
     /// Controls the frame of reference for <c>fill-translate</c>.
@@ -277,7 +283,8 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-translate-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public MapViewport? FillTranslateAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<MapViewport>))]
+    public OneOf<MapViewport, JsonArray>? FillTranslateAnchor { get; set; }
 
     /// <summary>
     /// Specifies the name of the image in the sprite to use for drawing image fills.
@@ -305,5 +312,6 @@ public class FillLayerPaint
     /// </remarks>
     [JsonPropertyName("fill-pattern")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public object? FillPattern { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<object>))]
+    public OneOf<object, JsonArray>? FillPattern { get; set; }
 }

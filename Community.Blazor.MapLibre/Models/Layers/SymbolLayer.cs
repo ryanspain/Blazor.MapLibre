@@ -47,7 +47,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("symbol-placement")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? SymbolPlacement { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? SymbolPlacement { get; set; }
 
     /// <summary>
     /// Defines the distance between two symbol anchors.
@@ -77,7 +78,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("symbol-spacing")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? SymbolSpacing { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? SymbolSpacing { get; set; }
 
     /// <summary>
     /// Determines whether symbols should avoid crossing tile edges to prevent mutual collisions.
@@ -108,7 +110,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("symbol-avoid-edges")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? SymbolAvoidEdges { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? SymbolAvoidEdges { get; set; }
 
     /// <summary>
     /// Specifies the sorting order of features based on their assigned value.
@@ -133,7 +136,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("symbol-sort-key")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? SymbolSortKey { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? SymbolSortKey { get; set; }
 
     /// <summary>
     /// Gets or sets the method for determining the rendering order of overlapping symbols within the same layer.
@@ -169,7 +173,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("symbol-z-order")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? SymbolZOrder { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? SymbolZOrder { get; set; }
 
     /// <summary>
     /// Controls whether the icon remains visible when overlapping other symbols.
@@ -194,7 +199,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("icon-allow-overlap")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? IconAllowOverlap { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? IconAllowOverlap { get; set; }
 
     /// <summary>
     /// Gets or sets the behavior for displaying an icon when it overlaps other symbols on the map.
@@ -222,7 +228,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("icon-overlap")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? IconOverlap { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? IconOverlap { get; set; }
 
     /// <summary>
     /// Determines whether other symbols remain visible even if they collide with the icon.
@@ -247,7 +254,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("icon-ignore-placement")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? IconIgnorePlacement { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? IconIgnorePlacement { get; set; }
 
     /// <summary>
     /// Controls whether text can be displayed independently of its corresponding icon when collisions occur.
@@ -272,7 +280,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("icon-optional")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? IconOptional { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? IconOptional { get; set; }
 
     /// <summary>
     /// Determines the rotation behavior of icons in combination with <c>symbol-placement</c>.
@@ -303,7 +312,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("icon-rotation-alignment")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? IconRotationAlignment { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? IconRotationAlignment { get; set; }
 
     /// <summary>
     /// Scales the original size of the icon by the specified factor.
@@ -337,7 +347,8 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("icon-size")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? IconSize { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? IconSize { get; set; }
 
     /// <summary>
     /// Determines how the icon is scaled to fit around the associated text.
@@ -371,199 +382,244 @@ public class SymbolLayerLayout
     /// </remarks>
     [JsonPropertyName("icon-text-fit")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? IconTextFit { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? IconTextFit { get; set; }
 
     [JsonPropertyName("icon-text-fit-padding")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? IconTextFitPadding { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? IconTextFitPadding { get; set; }
 
     [JsonPropertyName("icon-image")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonConverter(typeof(OneOfJsonConverter<string, JsonArray>))]
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
     public OneOf<string, JsonArray>? IconImage { get; set; }
 
     [JsonPropertyName("icon-rotate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? IconRotate { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? IconRotate { get; set; }
 
     [JsonPropertyName("icon-padding")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? IconPadding { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? IconPadding { get; set; }
 
     [JsonPropertyName("icon-keep-upright")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? IconKeepUpright { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? IconKeepUpright { get; set; }
 
     [JsonPropertyName("icon-offset")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? IconOffset { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? IconOffset { get; set; }
 
     [JsonPropertyName("icon-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? IconAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? IconAnchor { get; set; }
 
     [JsonPropertyName("icon-pitch-alignment")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? IconPitchAlignment { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? IconPitchAlignment { get; set; }
 
     [JsonPropertyName("text-pitch-alignment")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextPitchAlignment { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextPitchAlignment { get; set; }
 
     [JsonPropertyName("text-rotation-alignment")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextRotationAlignment { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextRotationAlignment { get; set; }
 
     [JsonPropertyName("text-field")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonConverter(typeof(OneOfJsonConverter<string, JsonArray>))]
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
     public OneOf<string, JsonArray>? TextField { get; set; }
 
     [JsonPropertyName("text-font")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string[]? TextFont { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string[]>))]
+    public OneOf<string[], JsonArray>? TextFont { get; set; }
 
     [JsonPropertyName("text-size")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextSize { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextSize { get; set; }
 
     [JsonPropertyName("text-max-width")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextMaxWidth { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextMaxWidth { get; set; }
 
     [JsonPropertyName("text-line-height")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextLineHeight { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextLineHeight { get; set; }
 
     [JsonPropertyName("text-letter-spacing")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextLetterSpacing { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextLetterSpacing { get; set; }
 
     [JsonPropertyName("text-justify")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextJustify { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextJustify { get; set; }
 
     [JsonPropertyName("text-radial-offset")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextRadialOffset { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextRadialOffset { get; set; }
 
     [JsonPropertyName("text-variable-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string[]? TextVariableAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string[]>))]
+    public OneOf<string[], JsonArray>? TextVariableAnchor { get; set; }
 
     [JsonPropertyName("text-variable-anchor-offset")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? TextVariableAnchorOffset { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? TextVariableAnchorOffset { get; set; }
 
     [JsonPropertyName("text-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextAnchor { get; set; }
 
     [JsonPropertyName("text-max-angle")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextMaxAngle { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextMaxAngle { get; set; }
 
     [JsonPropertyName("text-writing-mode")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string[]? TextWritingMode { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string[]>))]
+    public OneOf<string[], JsonArray>? TextWritingMode { get; set; }
 
     [JsonPropertyName("text-rotate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextRotate { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextRotate { get; set; }
 
     [JsonPropertyName("text-padding")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextPadding { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextPadding { get; set; }
 
     [JsonPropertyName("text-keep-upright")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? TextKeepUpright { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? TextKeepUpright { get; set; }
 
     [JsonPropertyName("text-transform")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextTransform { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextTransform { get; set; }
 
     [JsonPropertyName("text-offset")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? TextOffset { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? TextOffset { get; set; }
 
     [JsonPropertyName("text-allow-overlap")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? TextAllowOverlap { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? TextAllowOverlap { get; set; }
 
     [JsonPropertyName("text-overlap")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextOverlap { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextOverlap { get; set; }
 
     [JsonPropertyName("text-ignore-placement")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? TextIgnorePlacement { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? TextIgnorePlacement { get; set; }
 
     [JsonPropertyName("text-optional")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public bool? TextOptional { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<bool>))]
+    public OneOf<bool, JsonArray>? TextOptional { get; set; }
 
     [JsonPropertyName("visibility")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? Visibility { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? Visibility { get; set; }
 }
 
 public class SymbolLayerPaint
 {
     [JsonPropertyName("icon-opacity")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? IconOpacity { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? IconOpacity { get; set; }
 
     [JsonPropertyName("icon-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonConverter(typeof(OneOfJsonConverter<string, JsonArray>))]
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
     public OneOf<string, JsonArray>? IconColor { get; set; }
 
     [JsonPropertyName("icon-halo-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? IconHaloColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<string, JsonArray>? IconHaloColor { get; set; }
 
     [JsonPropertyName("icon-halo-width")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? IconHaloWidth { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? IconHaloWidth { get; set; }
 
     [JsonPropertyName("icon-halo-blur")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? IconHaloBlur { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? IconHaloBlur { get; set; }
 
     [JsonPropertyName("icon-translate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? IconTranslate { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? IconTranslate { get; set; }
 
     [JsonPropertyName("icon-translate-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? IconTranslateAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? IconTranslateAnchor { get; set; }
 
     [JsonPropertyName("text-opacity")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextOpacity { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextOpacity { get; set; }
 
     [JsonPropertyName("text-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextColor { get; set; }
 
     [JsonPropertyName("text-halo-color")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? TextHaloColor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<string>))]
+    public OneOf<string, JsonArray>? TextHaloColor { get; set; }
 
     [JsonPropertyName("text-halo-width")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextHaloWidth { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextHaloWidth { get; set; }
 
     [JsonPropertyName("text-halo-blur")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double? TextHaloBlur { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double>))]
+    public OneOf<double, JsonArray>? TextHaloBlur { get; set; }
 
     [JsonPropertyName("text-translate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public double[]? TextTranslate { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<double[]>))]
+    public OneOf<double[], JsonArray>? TextTranslate { get; set; }
 
     [JsonPropertyName("text-translate-anchor")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public MapViewport? TextTranslateAnchor { get; set; }
+    [JsonConverter(typeof(OneOfJsonConverter<MapViewport>))]
+    public OneOf<MapViewport, JsonArray>? TextTranslateAnchor { get; set; }
 }

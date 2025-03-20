@@ -8,7 +8,7 @@ public class FeatureFeature : IFeature
     public string Type => "Feature";
 
     [JsonPropertyName("geometry")]
-    public required IFeature Geometry { get; set; }
+    public required IGeometry Geometry { get; set; }
 
     [JsonPropertyName("properties")]
     public Dictionary<string, object>? Properties { get; set; }

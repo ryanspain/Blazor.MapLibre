@@ -2,7 +2,7 @@
 
 namespace Community.Blazor.MapLibre.Models.Feature;
 
-public class PointFeature : IFeature
+public class PointGeometry : IGeometry
 {
     [JsonPropertyName("type")]
     public string Type => "Point";

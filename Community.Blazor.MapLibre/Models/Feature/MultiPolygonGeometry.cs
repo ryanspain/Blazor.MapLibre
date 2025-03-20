@@ -2,7 +2,7 @@
 
 namespace Community.Blazor.MapLibre.Models.Feature;
 
-public class MultiPolygonFeature : IFeature
+public class MultiPolygonGeometry : IGeometry
 {
     [JsonPropertyName("type")]
     public string Type => "MultiPolygon";
