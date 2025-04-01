@@ -158,14 +158,14 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="controlType">The type of control to be added to the map.</param>
     /// <param name="options">Optional settings or parameters specific to the control being added.</param>
     /// <returns>A task that represents the asynchronous operation of adding the control.</returns>
-    public async ValueTask AddControl(ControlType controlType, object? options = null)
+    public async ValueTask AddControl(ControlType controlType, ControlPosition? position = null)
     {
         if (_bulkTransaction is not null)
         {
-            _bulkTransaction.Add("addControl", controlType.ToString(), options);
+            _bulkTransaction.Add("addControl", controlType.ToString(), position);
             return;
         }
-        await _jsModule.InvokeVoidAsync("addControl", MapId, controlType.ToString(), options);
+        await _jsModule.InvokeVoidAsync("addControl", MapId, controlType.ToString(), position);
     }
 
     /// <summary>
