@@ -26,7 +26,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// Represents the JavaScript module reference used to interact with the MapLibre map instance in the Blazor component.
     /// This is dynamically loaded and utilized to invoke JavaScript functions for map initialization and operations.
     /// </summary>
-    private IJSObjectReference? _jsModule;
+    private IJSObjectReference _jsModule = null!;
 
     /// <summary>
     /// Manages a thread-safe dictionary for storing references to .NET object instances
@@ -125,6 +125,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
 
         try
         {
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
             if (_jsModule is not null)
             {
                 await _jsModule.DisposeAsync();
@@ -160,16 +161,8 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         return new Listener(callback);
     }
 
-    public async Task<Listener> OnClick(string layerId, Action<MapMouseEvent> handler)
-    {
-        var callback = new CallbackHandler(_jsModule, "click", handler, typeof(MapMouseEvent));
-        var reference = DotNetObjectReference.Create(callback);
-        _references.TryAdd(Guid.NewGuid(), reference);
-
-        await _jsModule.InvokeVoidAsync("onClick", MapId, layerId, reference);
-
-        return new Listener(callback);
-    }
+    public async Task<Listener> OnClick(string? layerId, Action<MapMouseEvent> handler) =>
+        await AddListener("click", handler, layerId);
 
     #endregion
 
