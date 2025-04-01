@@ -5,6 +5,7 @@ using Community.Blazor.MapLibre.Models.Control;
 using Community.Blazor.MapLibre.Models.Image;
 using Community.Blazor.MapLibre.Models.Layers;
 using Community.Blazor.MapLibre.Models.Sources;
+using Community.Blazor.MapLibre.Models.Sprite;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -234,7 +235,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="url">The URL of the sprite image to be loaded.</param>
     /// <param name="options">Optional parameters to configure the sprite.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public async ValueTask AddSprite(string id, string url, object? options = null)
+    public async ValueTask AddSprite(string id, string url, StyleSetterOptions? options = null)
     {
         if (_bulkTransaction is not null)
         {
