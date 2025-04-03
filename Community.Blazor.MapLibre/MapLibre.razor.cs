@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using Community.Blazor.MapLibre.Models;
 using Community.Blazor.MapLibre.Models.Camera;
 using Community.Blazor.MapLibre.Models.Control;
+using Community.Blazor.MapLibre.Models.Event;
 using Community.Blazor.MapLibre.Models.Image;
 using Community.Blazor.MapLibre.Models.Layers;
 using Community.Blazor.MapLibre.Models.Sources;
@@ -122,7 +123,19 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             value.Dispose();
         }
 
-        await _jsModule.DisposeAsync();
+        try
+        {
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+            if (_jsModule is not null)
+            {
+                await _jsModule.DisposeAsync();
+            }
+        }
+        catch (JSDisconnectedException)
+        {
+            // Ignore
+            // https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/?view=aspnetcore-8.0#javascript-interop-calls-without-a-circuit
+        }
     }
 
     #endregion
@@ -147,6 +160,9 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
 
         return new Listener(callback);
     }
+
+    public async Task<Listener> OnClick(string? layerId, Action<MapMouseEvent> handler) =>
+        await AddListener("click", handler, layerId);
 
     #endregion
 
