@@ -6,6 +6,7 @@ using Community.Blazor.MapLibre.Models.Event;
 using Community.Blazor.MapLibre.Models.Feature;
 using Community.Blazor.MapLibre.Models.Image;
 using Community.Blazor.MapLibre.Models.Layers;
+using Community.Blazor.MapLibre.Models.Padding;
 using Community.Blazor.MapLibre.Models.Sources;
 using Community.Blazor.MapLibre.Models.Sprite;
 using Microsoft.AspNetCore.Components;
@@ -570,8 +571,8 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// Retrieves the current padding applied to the map's viewport.
     /// </summary>
     /// <returns>An object representing padding options applied to the map.</returns>
-    public async ValueTask<object> GetPadding() =>
-        await _jsModule.InvokeAsync<object>("getPadding", MapId);
+    public async ValueTask<PaddingOptions> GetPadding() =>
+        await _jsModule.InvokeAsync<PaddingOptions>("getPadding", MapId);
 
     /// <summary>
     /// Retrieves the value of a specific paint property of a specified layer.
