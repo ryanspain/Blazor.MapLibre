@@ -630,8 +630,8 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="id">The ID of the source to retrieve.</param>
     /// <returns>The source object if found, or null if not found.</returns>
-    public async ValueTask<object?> GetSource(string id) =>
-        await _jsModule.InvokeAsync<object?>("getSource", MapId, id);
+    public async ValueTask<ISource?> GetSource(string id) =>
+        await _jsModule.InvokeAsync<ISource?>("getSource", MapId, id);
 
     /// <summary>
     /// Retrieves the style's sprite as a list of objects.
