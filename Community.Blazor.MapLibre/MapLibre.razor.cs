@@ -3,6 +3,7 @@ using Community.Blazor.MapLibre.Models;
 using Community.Blazor.MapLibre.Models.Camera;
 using Community.Blazor.MapLibre.Models.Control;
 using Community.Blazor.MapLibre.Models.Event;
+using Community.Blazor.MapLibre.Models.Feature;
 using Community.Blazor.MapLibre.Models.Image;
 using Community.Blazor.MapLibre.Models.Layers;
 using Community.Blazor.MapLibre.Models.Sources;
@@ -472,7 +473,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="feature">The feature whose state is to be retrieved.</param>
     /// <returns>A task representing the asynchronous operation, with the result containing the state of the feature as an object.</returns>
-    public async ValueTask<object> GetFeatureState(object feature) =>
+    public async ValueTask<object> GetFeatureState(FeatureIdentifier feature) =>
         await _jsModule.InvokeAsync<object>("getFeatureState", MapId, feature);
 
     /// <summary>
@@ -534,8 +535,8 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// Retrieves the maximum geographical bounds the map is constrained to.
     /// </summary>
     /// <returns>An object representing the map's maximum bounds or null if not set.</returns>
-    public async ValueTask<object?> GetMaxBounds() =>
-        await _jsModule.InvokeAsync<object?>("getMaxBounds", MapId);
+    public async ValueTask<LngLatBounds?> GetMaxBounds() =>
+        await _jsModule.InvokeAsync<LngLatBounds?>("getMaxBounds", MapId);
 
     /// <summary>
     /// Retrieves the map's maximum allowable pitch.
