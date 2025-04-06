@@ -308,7 +308,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="bounds">The geographical bounding box to be fitted.</param>
     /// <param name="options">Optional parameters to customize the calculation.</param>
     /// <returns>A task that represents the asynchronous operation, containing the resulting center, zoom, and bearing.</returns>
-    public async ValueTask<CenterZoomBearing> CameraForBounds(LngLatBounds bounds, object? options = null) =>
+    public async ValueTask<CenterZoomBearing> CameraForBounds(LngLatBounds bounds, CameraForBoundsOptions? options = null) =>
         await _jsModule.InvokeAsync<CenterZoomBearing>("cameraForBounds", MapId, bounds, options);
 
     /// <summary>
