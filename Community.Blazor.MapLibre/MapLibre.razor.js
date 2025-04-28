@@ -26,7 +26,7 @@ function cutAntiMeridian(container, data) {
  */
 export function initializeMap(options, dotnetReference) {
     const map = new maplibregl.Map(options);
-    
+
     optionsInstances[options.container] = options;
     mapInstances[options.container] = map;
 
@@ -66,11 +66,11 @@ export function on(container, eventType, dotnetReference, layerIds) {
  *                               "AttributionControl", "FullscreenControl", "GeolocateControl",
  *                               "GlobeControl", "LogoControl", "NavigationControl", "ScaleControl",
  *                               and "TerrainControl".
- * @param {string} position - position on the map to which the control will be added. Valid values are 'top-left', 'top-right', 'bottom-left', and 'bottom-right'. Defaults to 'top-right'.
+ * @param {Object} options - Configuration options for the control instance being added.
  *
  * @throws {Error} Logs a warning if the specified control type is not supported.
  */
-export function addControl(container, controlType, position) {
+export function addControl(container, controlType, options) {
     const map = mapInstances[container];
     const controlsMap = {
         AttributionControl: maplibregl.AttributionControl,
@@ -85,7 +85,7 @@ export function addControl(container, controlType, position) {
 
     const ControlClass = controlsMap[controlType];
     if (ControlClass) {
-        const control = new ControlClass(position);
+        const control = new ControlClass(options);
         map.addControl(control);
     } else {
         console.warn(`Control type '${controlType}' is not supported.`);
@@ -142,7 +142,7 @@ export function addSource(container, id, source) {
 
 /**
  * Updates the data of a specific GeoJSON source
- * 
+ *
  * @param {string} container - The identifier for the map container instance.
  * @param {string} id - The unique identifier for the source you wish to update.
  * @param {Object} data - The GeoJSON data you wish to apply to the source
@@ -1149,6 +1149,18 @@ export function zoomOut(container, options, eventData) {
  */
 export function zoomTo(container, zoom, options, eventData) {
     mapInstances[container].zoomTo(zoom, options, eventData);
+}
+
+export function createPopup(container, settings, options) {
+    let instance = mapInstances[container];
+    console.log("createPopup", settings, options);
+    let popup = new maplibregl.Popup(options)
+        .setLngLat([settings.lngLat.lng, settings.lngLat.lat])
+        .setHTML(settings.content)
+        .addTo(instance);
+
+    popup._map = null;
+    return popup;
 }
 
 /**
