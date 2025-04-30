@@ -1152,15 +1152,10 @@ export function zoomTo(container, zoom, options, eventData) {
 }
 
 export function createPopup(container, settings, options) {
-    let instance = mapInstances[container];
-    console.log("createPopup", settings, options);
-    let popup = new maplibregl.Popup(options)
+    new maplibregl.Popup(options)
         .setLngLat([settings.lngLat.lng, settings.lngLat.lat])
         .setHTML(settings.content)
-        .addTo(instance);
-
-    popup._map = null;
-    return popup;
+        .addTo(mapInstances[container]);
 }
 
 /**
