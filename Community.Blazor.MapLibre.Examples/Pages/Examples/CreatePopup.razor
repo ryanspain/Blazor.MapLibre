@@ -1,0 +1,47 @@
+﻿@page "/Examples/CreatePopup"
+@using Community.Blazor.MapLibre.Models
+@using Community.Blazor.MapLibre.Models.Event
+<h3>Create Popup</h3>
+
+<MapLibre @ref="_map"
+          Options="_mapOptions"
+          OnLoad="OnMapLoad"
+          Class="rounded-top"
+          Width="600px"
+          Height="300px">
+</MapLibre>
+
+@code
+{
+    private MapLibre? _map { get; set; }
+
+    private readonly MapOptions _mapOptions = new()
+    {
+        Style = "https://demotiles.maplibre.org/style.json"
+    };
+
+    private async Task OnMapLoad(EventArgs args)
+    {
+        await _map!.OnClick(null, AddPopup);
+
+        return;
+
+        async void AddPopup(MapMouseEvent evnt) => await _map.CreatePopup(new Popup
+        {
+            Content = @<div>
+                <h3>Map clicked</h3>
+                <p>
+                    You clicked the map at
+                    <code>@evnt.LngLat.Latitude @evnt.LngLat.Longitude</code>
+                </p>
+            </div>,
+            Coordinates = evnt.LngLat
+        }, new PopupOptions
+        {
+            CloseOnClick = true,
+            CloseOnMove = true,
+            FocusAfterOpen = true,
+        });
+    }
+
+}
