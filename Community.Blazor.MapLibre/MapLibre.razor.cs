@@ -1032,10 +1032,11 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
 
     /// <summary>
     /// Increases the map's zoom level by 1.
+    /// Triggers the following events: movestart, move, moveend, zoomstart, zoom, and zoomend
     /// </summary>
     /// <param name="options">Animation options object (optional).</param>
     /// <param name="eventData">Additional event data (optional).</param>
-    public async ValueTask ZoomIn(object? options = null, object? eventData = null)
+    public async ValueTask ZoomIn(AnimationOptions? options = null, object? eventData = null)
     {
         await _jsModule.InvokeVoidAsync("zoomIn", MapId, options, eventData);
     }
