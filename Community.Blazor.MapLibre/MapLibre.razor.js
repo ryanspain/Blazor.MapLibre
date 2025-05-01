@@ -771,12 +771,12 @@ export function moveLayer(container, id, beforeId) {
 /**
  * Pans the map by the specified offset.
  * @param {string} container - The map container.
- * @param {Array} offset - The pan offset.
+ * @param {object} offset - The pan offset.
  * @param {object} options - Pan options.
  * @param {any} eventData - Optional event data.
  */
 export function panBy(container, offset, options, eventData) {
-    mapInstances[container].panBy(offset, options, eventData);
+    mapInstances[container].panBy([offset.x, offset.y], options, eventData);
 }
 
 /**

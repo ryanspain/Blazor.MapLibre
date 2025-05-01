@@ -773,7 +773,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="offset">The offset by which to pan the map, in pixels.</param>
     /// <param name="options">Additional pan options (e.g., animation parameters).</param>
     /// <param name="eventData">Optional event data associated with the operation.</param>
-    public async ValueTask PanBy(object offset, object? options = null, object? eventData = null) =>
+    public async ValueTask PanBy(PointLike offset, EaseToOptions? options = null, object? eventData = null) =>
         await _jsModule.InvokeVoidAsync("panBy", MapId, offset, options, eventData);
 
     /// <summary>

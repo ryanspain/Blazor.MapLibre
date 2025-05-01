@@ -188,7 +188,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - loaded()                                            | **✅ Complete**               |
 | - loadImage()                                         | **☑️ Partially Implemented** |
 | - moveLayer()                                         | **✅ Complete**               |
-| - panBy()                                             | **☑️ Partially Implemented** |
+| - panBy()                                             | **✅ Complete**               |
 | - panTo()                                             | **✅ Complete**               |
 | - project()                                           | **✅ Complete**               |
 | - queryRenderedFeatures()                             | **☑️ Partially Implemented** |
