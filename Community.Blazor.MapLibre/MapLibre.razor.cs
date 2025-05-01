@@ -782,7 +782,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="lngLat">The target longitude and latitude to pan to.</param>
     /// <param name="options">Additional options (e.g., duration).</param>
     /// <param name="eventData">Optional event data.</param>
-    public async ValueTask PanTo(object lngLat, object? options = null, object? eventData = null) =>
+    public async ValueTask PanTo(LngLat lngLat, EaseToOptions? options = null, object? eventData = null) =>
         await _jsModule.InvokeVoidAsync("panTo", MapId, lngLat, options, eventData);
 
     /// <summary>
