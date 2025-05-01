@@ -192,7 +192,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - panTo()                                             | **☑️ Partially Implemented** |
 | - project()                                           | **☑️ Partially Implemented** |
 | - queryRenderedFeatures()                             | **☑️ Partially Implemented** |
-| - querySourceFeatures()                               | **☑️ Partially Implemented** |
+| - querySourceFeatures()                               | **✅ Complete**               |
 | - queryTerrainElevation()                             | **✅ Complete**               |
 | - redraw()                                            | **✅ Complete**               |
 | - remove()                                            | **✅ Complete**               |

@@ -803,13 +803,32 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         await _jsModule.InvokeAsync<object[]>("queryRenderedFeatures", MapId, query, options);
 
     /// <summary>
-    /// Queries features from a source.
+    /// Returns an array of <see cref="MapGeoJSONFeature"/> objects representing features within the specified vector tile or GeoJSON source that satisfy the query parameters.
     /// </summary>
-    /// <param name="sourceId">The ID of the source.</param>
-    /// <param name="parameters">Query parameters as an object.</param>
-    /// <returns>An array of query results.</returns>
-    public async ValueTask<object[]> QuerySourceFeatures(string sourceId, object parameters) =>
-        await _jsModule.InvokeAsync<object[]>("querySourceFeatures", MapId, sourceId, parameters);
+    /// <param name="sourceId">
+    /// The ID of the vector tile or GeoJSON source to query.
+    /// </param>
+    /// <param name="parameters">
+    /// (Optional) Additional options to filter source features, such as <c>sourceLayer</c> or <c>filter</c>.
+    /// </param>
+    /// <returns>
+    /// An array of <see cref="MapGeoJSONFeature"/> objects. These include all features that match the query parameters,
+    /// regardless of whether they are currently rendered by the style.
+    /// </returns>
+    /// <remarks>
+    /// In contrast to <c>QueryRenderedFeatures</c>, this method includes all matching features from loaded tiles,
+    /// whether or not they are visible. Note that features may be split or duplicated across tile boundaries.
+    /// </remarks>
+    /// <example>
+    /// Find all features in the "your-source-layer" layer of a vector source:
+    /// <code>
+    /// var features = map.QuerySourceFeatures("your-source-id", new QuerySourceFeatureOptions {
+    ///     SourceLayer = "your-source-layer"
+    /// });
+    /// </code>
+    /// </example>
+    public async ValueTask<SimpleFeature[]> QuerySourceFeatures(string sourceId, QuerySourceFeatureOptions parameters) =>
+        await _jsModule.InvokeAsync<SimpleFeature[]>("querySourceFeatures", MapId, sourceId, parameters);
 
     /// <summary>
     /// Gets the elevation at a given location, in meters above sea level.
