@@ -205,7 +205,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - resetNorth()                                        | **☑️ Partially Implemented** |
 | - resetNorthPitch()                                   | **☑️ Partially Implemented** |
 | - resize()                                            | **☑️ Partially Implemented** |
-| - rotateTo()                                          | **☑️ Partially Implemented** |
+| - rotateTo()                                          | **✅ Complete**               |
 | - setBearing()                                        | **✅ Complete**               |
 | - setCenter()                                         | **✅ Complete**               |
 | - setCenterClampedToGround()                          | **✅ Complete**               |

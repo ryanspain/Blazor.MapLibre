@@ -948,7 +948,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="bearing">The target bearing.</param>
     /// <param name="options">Optional animation options.</param>
     /// <param name="eventData">Optional event data.</param>
-    public async ValueTask RotateTo(double bearing, object? options = null, object? eventData = null) =>
+    public async ValueTask RotateTo(double bearing, EaseToOptions? options = null, object? eventData = null) =>
         await _jsModule.InvokeVoidAsync("rotateTo", MapId, bearing, options, eventData);
 
     /// <summary>
