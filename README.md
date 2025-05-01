@@ -182,7 +182,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - isSourceLoaded()                                    | **✅ Complete**               |
 | - isStyleLoaded()                                     | **✅ Complete**               |
 | - isZooming()                                         | **✅ Complete**               |
-| - jumpTo()                                            | **☑️ Partially Implemented** |
+| - jumpTo()                                            | **✅ Complete**               |
 | - listens()                                           | **✅ Complete**               |
 | - listImages()                                        | **✅ Complete**               |
 | - loaded()                                            | **✅ Complete**               |

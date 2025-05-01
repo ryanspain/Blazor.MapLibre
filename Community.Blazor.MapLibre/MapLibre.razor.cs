@@ -722,11 +722,16 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         await _jsModule.InvokeAsync<bool>("isZooming", MapId);
 
     /// <summary>
-    /// Updates the map view by changing the center, zoom, bearing, pitch, or roll without animation.
+    /// Instantly moves the map camera to a new location, zoom, bearing, pitch, or roll without animation.
+    /// Unspecified properties in <paramref name="options"/> will retain their current values.
     /// </summary>
-    /// <param name="options">The new view options.</param>
-    /// <param name="eventData">Optional event data.</param>
-    public async ValueTask JumpTo(object options, object? eventData = null) =>
+    /// <param name="options">
+    /// An object specifying the new camera state, such as center, zoom, pitch, bearing, or roll.
+    /// </param>
+    /// <param name="eventData">
+    /// Optional. Extra data to attach to any events triggered by this method.
+    /// </param>
+    public async ValueTask JumpTo(JumpToOptions options, object? eventData = null) =>
         await _jsModule.InvokeVoidAsync("jumpTo", MapId, options, eventData);
 
     /// <summary>
