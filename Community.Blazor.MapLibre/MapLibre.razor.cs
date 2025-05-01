@@ -936,8 +936,14 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
 
     /// <summary>
     /// Resizes the map to fit its container dimensions.
+    /// Checks if the map container size changed and updates the map if it has changed.
+    /// This method must be called after the map's container is resized programmatically or when the map is shown after being initially hidden with CSS.<br/>
+    /// Triggers the following events: movestart, move, moveend, and resize.
     /// </summary>
-    /// <param name="eventData">Optional event data.</param>
+    /// <param name="eventData">
+    /// Additional properties to be passed to movestart, move, resize, and moveend events that get triggered as a result of resize.
+    /// This can be useful for differentiating the source of an event (for example, user-initiated or programmatically-triggered events).
+    /// </param>
     /// <param name="constrainTransform">Whether to constrain the transform.</param>
     public async ValueTask Resize(object? eventData = null, bool constrainTransform = true) =>
         await _jsModule.InvokeVoidAsync("resize", MapId, eventData, constrainTransform);

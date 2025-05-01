@@ -204,7 +204,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - removeSprite()                                      | **✅ Complete**               |
 | - resetNorth()                                        | **☑️ Partially Implemented** |
 | - resetNorthPitch()                                   | **☑️ Partially Implemented** |
-| - resize()                                            | **☑️ Partially Implemented** |
+| - resize()                                            | **✅ Complete**               |
 | - rotateTo()                                          | **✅ Complete**               |
 | - setBearing()                                        | **✅ Complete**               |
 | - setCenter()                                         | **✅ Complete**               |
