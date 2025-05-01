@@ -1056,7 +1056,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="zoom">The target zoom level.</param>
     /// <param name="options">Animation options for duration, easing, etc. (optional).</param>
     /// <param name="eventData">Additional event data (optional).</param>
-    public async ValueTask ZoomTo(double zoom, object? options = null, object? eventData = null)
+    public async ValueTask ZoomTo(double zoom, EaseToOptions? options = null, object? eventData = null)
     {
         await _jsModule.InvokeVoidAsync("zoomTo", MapId, zoom, options, eventData);
     }

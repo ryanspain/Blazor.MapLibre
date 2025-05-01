@@ -218,7 +218,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - updateImage()                                       | **☑️ Partially Implemented** |
 | - zoomIn()                                            | **☑️ Partially Implemented** |
 | - zoomOut()                                           | **☑️ Partially Implemented** |
-| - zoomTo()                                            | **☑️ Partially Implemented** |
+| - zoomTo()                                            | **✅ Complete**               |
 
 </details>
 
