@@ -210,7 +210,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - setCenter()                                         | **☑️ Partially Implemented** |
 | - setCenterClampedToGround()                          | **✅ Complete**               |
 | - setCenterElevation()                                | **✅ Complete**               |
-| - setFeatureState()                                   | **☑️ Partially Implemented** |
+| - setFeatureState()                                   | **✅ Complete**               |
 | - setZoom()                                           | **✅ Complete**               |
 | - setStyle()                                          | **☑️ Partially Implemented** |
 | - stop()                                              | **✅ Complete**               |

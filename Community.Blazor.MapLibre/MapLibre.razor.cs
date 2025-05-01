@@ -987,7 +987,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="feature">The feature identifier object.</param>
     /// <param name="state">The state properties to apply to the feature.</param>
-    public async ValueTask SetFeatureState(object feature, object state) =>
+    public async ValueTask SetFeatureState(FeatureIdentifier feature, object state) =>
         await _jsModule.InvokeVoidAsync("setFeatureState", MapId, feature, state);
 
     /// <summary>
