@@ -197,7 +197,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - redraw()                                            | **✅ Complete**               |
 | - remove()                                            | **✅ Complete**               |
 | - removeControl()                                     | **☑️ Partially Implemented** |
-| - removeFeatureState()                                | **☑️ Partially Implemented** |
+| - removeFeatureState()                                | **✅ Complete**               |
 | - removeImage()                                       | **✅ Complete**               |
 | - removeLayer()                                       | **✅ Complete**               |
 | - removeSource()                                      | **✅ Complete**               |

@@ -848,11 +848,49 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     }
 
     /// <summary>
-    /// Removes feature states from the map.
+    /// Removes the state of a feature, setting it back to the default behavior.
+    /// <list type="bullet">
+    /// <item>If only <c>target.source</c> is specified, it will remove the state for all features from that source.</item>
+    /// <item>If <c>target.id</c> is also specified, it removes all keys for that specific feature's state.</item>
+    /// <item>If <paramref name="key"/> is also provided, only that key is removed from the feature's state.</item>
+    /// </list>
+    /// Features are identified by their <c>feature.id</c> attribute, which can be any number or string.
     /// </summary>
-    /// <param name="target">The feature or source to remove states from.</param>
-    /// <param name="key">The optional key of the state to remove.</param>
-    public async ValueTask RemoveFeatureState(object target, string? key = null)
+    /// <param name="target">
+    /// Identifier of where to remove state. It can refer to a source, a specific feature, or a key of a feature.
+    /// Feature objects returned from <c>QueryRenderedFeatures</c> or event handlers can be used.
+    /// </param>
+    /// <param name="key">
+    /// (Optional) The key in the feature state to reset.
+    /// </param>
+    /// <returns>The current map instance.</returns>
+    /// <example>
+    /// Reset the entire state object for all features in the "my-source" source:
+    /// <code>
+    /// map.RemoveFeatureState(new FeatureIdentifier { Source = "my-source" });
+    /// </code>
+    /// </example>
+    /// <example>
+    /// Reset the entire state object for a specific feature:
+    /// <code>
+    /// map.RemoveFeatureState(new FeatureIdentifier {
+    ///     Source = "my-source",
+    ///     SourceLayer = "my-source-layer",
+    ///     Id = featureId
+    /// });
+    /// </code>
+    /// </example>
+    /// <example>
+    /// Reset only the "hover" key for a specific feature:
+    /// <code>
+    /// map.RemoveFeatureState(new FeatureIdentifier {
+    ///     Source = "my-source",
+    ///     SourceLayer = "my-source-layer",
+    ///     Id = featureId
+    /// }, "hover");
+    /// </code>
+    /// </example>
+    public async ValueTask RemoveFeatureState(FeatureIdentifier target, string? key = null)
     {
         if (_bulkTransaction is not null)
         {
