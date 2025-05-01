@@ -1045,7 +1045,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="options">Animation options object (optional).</param>
     /// <param name="eventData">Additional event data (optional).</param>
-    public async ValueTask ZoomOut(object? options = null, object? eventData = null)
+    public async ValueTask ZoomOut(AnimationOptions? options = null, object? eventData = null)
     {
         await _jsModule.InvokeVoidAsync("zoomOut", MapId, options, eventData);
     }
