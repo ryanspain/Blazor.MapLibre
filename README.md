@@ -207,7 +207,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - resize()                                            | **☑️ Partially Implemented** |
 | - rotateTo()                                          | **☑️ Partially Implemented** |
 | - setBearing()                                        | **✅ Complete**               |
-| - setCenter()                                         | **☑️ Partially Implemented** |
+| - setCenter()                                         | **✅ Complete**               |
 | - setCenterClampedToGround()                          | **✅ Complete**               |
 | - setCenterElevation()                                | **✅ Complete**               |
 | - setFeatureState()                                   | **✅ Complete**               |

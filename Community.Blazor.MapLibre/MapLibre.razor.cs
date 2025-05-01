@@ -964,7 +964,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="center">The geographical center coordinates [longitude, latitude].</param>
     /// <param name="eventData">Optional event data.</param>
-    public async ValueTask SetCenter(object center, object? eventData = null) =>
+    public async ValueTask SetCenter(LngLat center, object? eventData = null) =>
         await _jsModule.InvokeVoidAsync("setCenter", MapId, center, eventData);
 
     /// <summary>
