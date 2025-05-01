@@ -812,11 +812,19 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         await _jsModule.InvokeAsync<object[]>("querySourceFeatures", MapId, sourceId, parameters);
 
     /// <summary>
-    /// Queries terrain elevation at the given location.
+    /// Gets the elevation at a given location, in meters above sea level.
     /// </summary>
-    /// <param name="lngLat">An array with longitude and latitude coordinates.</param>
-    /// <returns>The elevation in meters at the given location.</returns>
-    public async ValueTask<double> QueryTerrainElevation(object lngLat) =>
+    /// <param name="lngLat">
+    /// A geographic coordinate representing the location to query. Can be a <c>LngLat</c> object or an array [longitude, latitude].
+    /// </param>
+    /// <returns>
+    /// The elevation in meters above sea level at the specified location. Returns <c>null</c> if terrain is not enabled.
+    /// If terrain exaggeration is applied, the returned elevation is multiplied accordingly.
+    /// </returns>
+    /// <remarks>
+    /// This method is useful for accurately positioning custom 3D objects relative to terrain elevation.
+    /// </remarks>
+    public async ValueTask<double> QueryTerrainElevation(LngLat lngLat) =>
         await _jsModule.InvokeAsync<double>("queryTerrainElevation", MapId, lngLat);
 
     /// <summary>
