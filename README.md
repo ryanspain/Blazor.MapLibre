@@ -203,7 +203,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - removeSource()                                      | **✅ Complete**               |
 | - removeSprite()                                      | **✅ Complete**               |
 | - resetNorth()                                        | **☑️ Partially Implemented** |
-| - resetNorthPitch()                                   | **☑️ Partially Implemented** |
+| - resetNorthPitch()                                   | **✅ Complete**               |
 | - resize()                                            | **✅ Complete**               |
 | - rotateTo()                                          | **✅ Complete**               |
 | - setBearing()                                        | **✅ Complete**               |

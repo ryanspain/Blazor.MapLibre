@@ -919,7 +919,9 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     }
 
     /// <summary>
-    /// Rotates the map to reset north to be up.
+    /// Rotates and pitches the map so that north is up (0° bearing) and pitch and roll are 0°, with an animated transition.
+    /// <br/>
+    /// Triggers the following events: movestart, move, moveend, pitchstart, pitch, pitchend, rollstart, roll, rollend, and rotate.
     /// </summary>
     /// <param name="options">Animation options.</param>
     /// <param name="eventData">Optional event data.</param>
@@ -931,7 +933,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="options">Animation options.</param>
     /// <param name="eventData">Optional event data.</param>
-    public async ValueTask ResetNorthPitch(object? options = null, object? eventData = null) =>
+    public async ValueTask ResetNorthPitch(AnimationOptions? options = null, object? eventData = null) =>
         await _jsModule.InvokeVoidAsync("resetNorthPitch", MapId, options, eventData);
 
     /// <summary>
