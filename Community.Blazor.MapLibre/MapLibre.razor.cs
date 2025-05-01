@@ -1017,7 +1017,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="point">The pixel coordinates [x, y].</param>
     /// <returns>Geographical coordinates [longitude, latitude].</returns>
-    public async ValueTask<object> Unproject(object point) =>
+    public async ValueTask<object> Unproject(PointLike point) =>
         await _jsModule.InvokeAsync<object>("unproject", MapId, point);
 
     /// <summary>

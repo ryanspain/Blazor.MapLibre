@@ -214,7 +214,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - setZoom()                                           | **✅ Complete**               |
 | - setStyle()                                          | **☑️ Partially Implemented** |
 | - stop()                                              | **✅ Complete**               |
-| - unproject()                                         | **☑️ Partially Implemented** |
+| - unproject()                                         | **✅ Complete**               |
 | - updateImage()                                       | **☑️ Partially Implemented** |
 | - zoomIn()                                            | **✅ Complete**               |
 | - zoomOut()                                           | **✅ Complete**               |

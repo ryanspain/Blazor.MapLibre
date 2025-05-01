@@ -1107,7 +1107,7 @@ export function triggerRepaint(container) {
  * @returns {Array<number>} Geographical coordinates [lng, lat].
  */
 export function unproject(container, point) {
-    return mapInstances[container].unproject(point);
+    return mapInstances[container].unproject([point.x, point.y]);
 }
 
 /**
