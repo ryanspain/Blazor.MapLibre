@@ -190,7 +190,7 @@ You can customize the map more with options using `MapOptions.cs`:
 | - moveLayer()                                         | **✅ Complete**               |
 | - panBy()                                             | **☑️ Partially Implemented** |
 | - panTo()                                             | **☑️ Partially Implemented** |
-| - project()                                           | **☑️ Partially Implemented** |
+| - project()                                           | **✅ Complete**               |
 | - queryRenderedFeatures()                             | **☑️ Partially Implemented** |
 | - querySourceFeatures()                               | **✅ Complete**               |
 | - queryTerrainElevation()                             | **✅ Complete**               |

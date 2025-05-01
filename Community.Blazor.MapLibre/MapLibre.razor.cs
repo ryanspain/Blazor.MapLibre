@@ -790,8 +790,11 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     /// <param name="lngLat">The geographical coordinates to project.</param>
     /// <returns>The projected point as pixel coordinates.</returns>
-    public async ValueTask<object> Project(object lngLat) =>
-        await _jsModule.InvokeAsync<object>("project", MapId, lngLat);
+    public async ValueTask<PointLike> Project(LngLat lngLat)
+    {
+        var result = await _jsModule.InvokeAsync<double[]>("project", MapId, lngLat);
+        return PointLike.FromArray(result);
+    }
 
     /// <summary>
     /// Queries the map for rendered features within a specified geometry or options.
