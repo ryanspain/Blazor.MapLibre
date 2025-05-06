@@ -829,7 +829,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         await _jsModule.InvokeAsync<object[]>("queryRenderedFeatures", MapId, query, options);
 
     /// <summary>
-    /// Returns an array of <see cref="MapGeoJSONFeature"/> objects representing features within the specified vector tile or GeoJSON source that satisfy the query parameters.
+    /// Returns an array of <see cref="SimpleFeature"/> objects representing features within the specified vector tile or GeoJSON source that satisfy the query parameters.
     /// </summary>
     /// <param name="sourceId">
     /// The ID of the vector tile or GeoJSON source to query.
@@ -838,7 +838,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// (Optional) Additional options to filter source features, such as <c>sourceLayer</c> or <c>filter</c>.
     /// </param>
     /// <returns>
-    /// An array of <see cref="MapGeoJSONFeature"/> objects. These include all features that match the query parameters,
+    /// An array of <see cref="SimpleFeature"/> objects. These include all features that match the query parameters,
     /// regardless of whether they are currently rendered by the style.
     /// </returns>
     /// <remarks>
@@ -1092,6 +1092,16 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         await _jsModule.InvokeVoidAsync("setFeatureState", MapId, feature, state);
 
     /// <summary>
+    /// Sets the map's projection configuration, which determines how geographic coordinates are projected to the screen.
+    /// </summary>
+    /// <param name="projection">
+    /// The projection specification to apply. This can be a string (e.g., <c>"mercator"</c>),
+    /// a dynamic expression (e.g., based on zoom), or a custom projection definition.
+    /// </param>
+    public async ValueTask SetProjection(ProjectionSpecification projection) =>
+        await _jsModule.InvokeVoidAsync("setProjection", MapId, projection);
+    
+    /// <summary>
     /// Sets a zoom level for the map.
     /// </summary>
     /// <param name="zoom">The desired zoom level (0–20).</param>
@@ -1203,4 +1213,5 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     }
 
     #endregion
+
 }
