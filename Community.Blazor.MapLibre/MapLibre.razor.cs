@@ -1099,14 +1099,9 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// Filters control which features a style layer renders from its source. 
     /// Any feature for which the filter expression evaluates to <c>true</c> will be rendered on the map. 
     /// Those that are <c>false</c> will be hidden.
-    /// 
     /// Use <c>SetFilter</c> to show a subset of your source data.
-    /// 
     /// To clear the filter, pass <c>null</c> or omit the second parameter.
     /// </remarks>
-    /// <param name="layerId">
-    /// The ID of the layer to which the filter will be applied.
-    /// </param>
     /// <param name="filter">
     /// The filter, conforming to the MapLibre Style Specification's filter definition. 
     /// If <c>null</c> is provided, the function removes any existing filter from the layer.
