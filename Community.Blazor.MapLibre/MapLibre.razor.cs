@@ -1102,6 +1102,9 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// Use <c>SetFilter</c> to show a subset of your source data.
     /// To clear the filter, pass <c>null</c> or omit the second parameter.
     /// </remarks>
+    /// <param name="layerId">
+    /// The ID of the layer to apply the filter to.
+    /// </param>
     /// <param name="filter">
     /// The filter, conforming to the MapLibre Style Specification's filter definition. 
     /// If <c>null</c> is provided, the function removes any existing filter from the layer.
@@ -1109,8 +1112,8 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// <param name="options">
     /// Optional. An options object for configuring style setting behavior.
     /// </param>
-    public async ValueTask SetFilter(object filter, StyleSetterOptions options) =>
-        await _jsModule.InvokeVoidAsync("setFilter", MapId, filter, options);
+    public async ValueTask SetFilter(string layerId, object filter, StyleSetterOptions options) =>
+        await _jsModule.InvokeVoidAsync("setFilter", MapId, layerId, filter, options);
     
     /// <summary>
     /// Sets the map's projection configuration, which determines how geographic coordinates are projected to the screen.
