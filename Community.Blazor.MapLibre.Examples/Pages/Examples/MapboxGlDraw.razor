@@ -1,7 +1,5 @@
-@page "/MapboxGlDraw"
-@using System.Text.Json
-@using Community.Blazor.MapLibre.Models.Control
-@inject IJSRuntime _jsRuntime
+@page "/Examples/MapboxGlDraw"
+@using Community.Blazor.MapLibre.Models.Feature
 
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.css" type="text/css">
 
@@ -25,7 +23,7 @@
 </div>
 
 <div>
-    Size: @size
+    Size: @size m²
 </div>
 
 
@@ -63,10 +61,102 @@
         }
     }
 
-    private void Callback((object featureData, object mapStatus) obj)
+    private void Callback((FeatureCollection featureCollection, string mapStatus) obj)
     {
-        Console.WriteLine(JsonSerializer.Serialize(obj.featureData));
-        Console.WriteLine(JsonSerializer.Serialize(obj.mapStatus));
+        try
+        {
+            var featureCollection = obj.featureCollection;
+
+            if (featureCollection.Features.Count > 0)
+            {
+                decimal totalArea = 0;
+                
+                foreach (var feature in featureCollection.Features)
+                {
+                    if (feature is FeatureFeature featureFeature)
+                    {
+                        if (featureFeature.Geometry is PolygonGeometry polygonGeometry)
+                        {
+                            decimal area = (decimal)PolygonAreaCalculator.CalculateArea(polygonGeometry);
+                            totalArea += area;
+                        }
+                    }
+                }
+                
+                size = Math.Round(totalArea, 2);
+            }
+            else
+            {
+                size = 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error processing feature data: {ex.Message}");
+            size = 0;
+        }
+        
+        // Trigger UI update
+        StateHasChanged();
     }
 
+    // Polygon area calculator
+    public static class PolygonAreaCalculator
+    {
+        private const double EARTH_RADIUS = 6378137.0; // Earth radius in meters
+
+        /// <summary>
+        /// Calculates the area of a polygon in square meters
+        /// </summary>
+        /// <param name="polygonGeometry">The polygon geometry</param>
+        /// <returns>Area in square meters</returns>
+        public static double CalculateArea(PolygonGeometry polygonGeometry)
+        {
+            if (polygonGeometry?.Coordinates == null || polygonGeometry.Coordinates.Length == 0)
+                return 0;
+
+            // Calculate area of outer ring (first ring)
+            double area = Math.Abs(CalculateRingArea(polygonGeometry.Coordinates[0]));
+
+            // Subtract area of holes (inner rings)
+            for (int i = 1; i < polygonGeometry.Coordinates.Length; i++)
+            {
+                area -= Math.Abs(CalculateRingArea(polygonGeometry.Coordinates[i]));
+            }
+
+            return area;
+        }
+
+        /// <summary>
+        /// Calculates the area of a single ring using the Shoelace formula and converts to square meters
+        /// </summary>
+        private static double CalculateRingArea(double[][] coordinates)
+        {
+            int vertexCount = coordinates.Length;
+            if (vertexCount < 3)
+                return 0;
+
+            double area = 0;
+            
+            // Convert coordinates to radians
+            var rad = new List<(double lon, double lat)>();
+            foreach (var coord in coordinates)
+            {
+                rad.Add((
+                    coord[0] * Math.PI / 180,
+                    coord[1] * Math.PI / 180
+                ));
+            }
+
+            // Calculate the geodesic area using spherical math
+            for (int i = 0; i < vertexCount; i++)
+            {
+                int j = (i + 1) % vertexCount;
+                area += (rad[j].lon - rad[i].lon) * Math.Sin(rad[i].lat);
+            }
+
+            area = Math.Abs(area * EARTH_RADIUS * EARTH_RADIUS / 2.0);
+            return area;
+        }
+    }
 }

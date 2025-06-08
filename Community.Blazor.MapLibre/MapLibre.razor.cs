@@ -5,6 +5,7 @@ using Community.Blazor.MapLibre.Models.Camera;
 using Community.Blazor.MapLibre.Models.Control;
 using Community.Blazor.MapLibre.Models.Event;
 using Community.Blazor.MapLibre.Models.Feature;
+using Community.Blazor.MapLibre.Models.Feature.Dto;
 using Community.Blazor.MapLibre.Models.Image;
 using Community.Blazor.MapLibre.Models.Layers;
 using Community.Blazor.MapLibre.Models.Marker;
@@ -102,7 +103,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// such as modifications to drawn shapes or geographic feature data updates.
     /// </summary>
     [Parameter]
-    public EventCallback<(object featureData, object mapStatus)> OnDrawUpdate { get; set; }
+    public EventCallback<(FeatureCollection featureData, string mapStatus)> OnDrawUpdate { get; set; }
     
     #endregion
 
@@ -116,9 +117,10 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     }
 
     [JSInvokable]
-    public async Task OnDrawUpdateCallback(object featureData, string mapStatus)
+    public async Task OnDrawUpdateCallback(JsFeatureCollection jsFeatureCollection, string mapStatus)
     {
-        await OnDrawUpdate.InvokeAsync((featureData, mapStatus));
+        var featureCollection = jsFeatureCollection.ToFeatureCollection();
+        await OnDrawUpdate.InvokeAsync((featureCollection, mapStatus));
     }
 
     
