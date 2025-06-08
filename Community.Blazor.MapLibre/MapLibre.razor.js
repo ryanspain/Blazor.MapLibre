@@ -96,6 +96,31 @@ export function addControl(container, controlType, position) {
     }
 }
 
+export function addDrawControl(container, drawOptions, dotnetReference) {
+    MapboxDraw.constants.classes.CANVAS  = 'maplibregl-canvas';
+    MapboxDraw.constants.classes.CONTROL_BASE  = 'maplibregl-ctrl';
+    MapboxDraw.constants.classes.CONTROL_PREFIX = 'maplibregl-ctrl-';
+    MapboxDraw.constants.classes.CONTROL_GROUP = 'maplibregl-ctrl-group';
+    MapboxDraw.constants.classes.ATTRIBUTION = 'maplibregl-ctrl-attrib';
+
+    const map = mapInstances[container];
+
+    const draw = new MapboxDraw(drawOptions)
+    map.addControl(draw);
+
+    map.on('draw.create', updateArea);
+    map.on('draw.delete', updateArea);
+    map.on('draw.update', updateArea);
+
+    function updateArea(e) {
+        const data = draw.getAll();
+
+        // Current JavaScript call
+        dotnetReference.invokeMethodAsync("OnDrawUpdateCallback", data, e.type);
+        console.log(data);
+    }
+}
+
 /**
  * Asynchronously adds an image to a map instance for the specified container.
  *

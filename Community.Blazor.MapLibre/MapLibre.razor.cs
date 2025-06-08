@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Text.Json;
 using Community.Blazor.MapLibre.Models;
 using Community.Blazor.MapLibre.Models.Camera;
 using Community.Blazor.MapLibre.Models.Control;
@@ -94,6 +95,14 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     [Parameter]
     public EventCallback<EventArgs> OnStyleLoad { get; set; }
+
+    /// <summary>
+    /// Triggered when a draw-related update occurs on the map.
+    /// Allows the user to respond to changes or updates related to drawing features on the map,
+    /// such as modifications to drawn shapes or geographic feature data updates.
+    /// </summary>
+    [Parameter]
+    public EventCallback<(object featureData, object mapStatus)> OnDrawUpdate { get; set; }
     
     #endregion
 
@@ -105,6 +114,13 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     {
         await OnStyleLoad.InvokeAsync(EventArgs.Empty);
     }
+
+    [JSInvokable]
+    public async Task OnDrawUpdateCallback(object featureData, string mapStatus)
+    {
+        await OnDrawUpdate.InvokeAsync((featureData, mapStatus));
+    }
+
     
     /// <summary>
     /// Invokes the OnLoad event callback when the map component has fully loaded.
@@ -206,6 +222,18 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         }
 
         await _jsModule.InvokeVoidAsync("addControl", MapId, controlType.ToString(), position);
+    }
+
+    /// <summary>
+    /// Adds a control to the map instance based on the specified control type and options.
+    /// </summary>
+    /// <param name="drawControl">The type of control to be added to the map.</param>
+    /// <returns>A task that represents the asynchronous operation of adding the control.</returns>
+    public async ValueTask AddDrawControl(object drawControl)
+    {
+        var reference = DotNetObjectReference.Create(this);
+
+        await _jsModule.InvokeVoidAsync("addDrawControl", MapId, drawControl, reference);
     }
 
     /// <summary>
