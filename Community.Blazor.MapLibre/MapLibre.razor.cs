@@ -89,7 +89,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     [Parameter]
     public EventCallback<EventArgs> OnLoad { get; set; }
-    
+
     /// <summary>
     /// Callback event that is triggered when the map style completes loading.
     /// Allows users to execute custom logic upon the successful initialization of the style.
@@ -104,7 +104,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     [Parameter]
     public EventCallback<(FeatureCollection featureData, string mapStatus)> OnDrawUpdate { get; set; }
-    
+
     #endregion
 
     /// <summary>
@@ -123,7 +123,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         await OnDrawUpdate.InvokeAsync((featureCollection, mapStatus));
     }
 
-    
+
     /// <summary>
     /// Invokes the OnLoad event callback when the map component has fully loaded.
     /// </summary>
@@ -148,10 +148,10 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
                 "./_content/Community.Blazor.MapLibre/MapLibre.razor.js");
 
             _dotNetObjectReference = DotNetObjectReference.Create(this);
-            
+
             // Just making sure the Container is being seeded on Create
             Options.Container = MapId;
-            
+
             // Initialize the MapLibre map
             await _jsModule.InvokeVoidAsync("initializeMap", Options, _dotNetObjectReference);
         }
@@ -237,6 +237,14 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
 
         await _jsModule.InvokeVoidAsync("addDrawControl", MapId, drawControl, reference);
     }
+
+    /// <summary>
+    /// Adds a feature to the map's draw control.
+    /// </summary>
+    /// <param name="feature">The feature to be added to the draw control.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public async ValueTask AddFeatureToDraw(FeatureFeature feature) =>
+        await _jsModule.InvokeVoidAsync("addFeatureToDraw", MapId, feature);
 
     /// <summary>
     /// Adds an image to the map for use in styling or layer configuration.
