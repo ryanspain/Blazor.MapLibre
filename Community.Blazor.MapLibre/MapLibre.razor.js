@@ -2,6 +2,7 @@ import splitGeoJSON from './geojson-antimeridian-cut/cut.js'
 
 const mapInstances = {};
 const optionsInstances = {};
+const drawInstances = {};
 
 /**
  * Cuts the GeoJSON source at the antimeridian if the option is enabled.
@@ -106,6 +107,7 @@ export function addDrawControl(container, drawOptions, dotnetReference) {
     const map = mapInstances[container];
 
     const draw = new MapboxDraw(drawOptions)
+    drawInstances[container] = draw;
     map.addControl(draw);
 
     map.on('draw.create', updateArea);
@@ -119,6 +121,19 @@ export function addDrawControl(container, drawOptions, dotnetReference) {
         dotnetReference.invokeMethodAsync("OnDrawUpdateCallback", data, e.type);
         console.log(data);
     }
+}
+
+/**
+ * Adds a feature to the draw instance associated with the specified container.
+ *
+ * @param {string} container - The identifier for the container associated with a draw instance.
+ * @param {Object} feature - The feature object to be added to the draw instance.
+ * @return {void} No return value.
+ */
+export function addFeatureToDraw(container, feature) {
+    const draw = drawInstances[container];
+
+    draw.add(feature);
 }
 
 /**
