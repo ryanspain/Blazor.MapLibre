@@ -1267,7 +1267,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             throw new InvalidOperationException("No bulk transaction is in progress.");
         }
 
-        await _jsModule.InvokeVoidAsync("executeTransaction", _bulkTransaction.Transactions);
+        await _jsModule.InvokeVoidAsync("executeTransaction", MapId, _bulkTransaction.Transactions);
         _bulkTransaction = null;
     }
 
