@@ -1225,6 +1225,19 @@ export function removeMarker(markerId){
 }
 
 /**
+ * Moves a marker to the specified coordinates
+ * The only purpose of bulk transaction send multiple transactions in one message, reducing the roundtrip time.
+ * Each action in the transaction is performed in the order they are received.
+ * @param {string} markerId - The map container.
+ * @param {object} position - Options for animation like duration, offset, etc.
+ */
+export function moveMarker(markerId, position) {
+    const marker = markerInstances[markerId];
+    
+    marker.setLngLat([position.lng, position.lat]);
+}
+
+/**
  * Perform all applied bulk transactions.
  * The only purpose of bulk transaction send multiple transactions in one message, reducing the roundtrip time.
  * Each action in the transaction is performed in the order they are received.
