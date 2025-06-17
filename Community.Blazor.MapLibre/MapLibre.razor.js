@@ -3,6 +3,7 @@ import splitGeoJSON from './geojson-antimeridian-cut/cut.js'
 const mapInstances = {};
 const optionsInstances = {};
 const drawInstances = {};
+const markerInstances = {};
 
 /**
  * Cuts the GeoJSON source at the antimeridian if the option is enabled.
@@ -1211,10 +1212,18 @@ export function createPopup(container, settings, options) {
         .addTo(mapInstances[container]);
 }
 
-export function createMarker(container, options, position) {
-    new maplibregl.Marker(options)
+export function createMarker(container, markerId, options, position) {
+    var marker = new maplibregl.Marker(options)
         .setLngLat([position.lng, position.lat])
         .addTo(mapInstances[container]);
+
+    markerInstances[markerId] = marker;
+}
+
+export function removeMarker(markerId){
+    var marker = markerInstances[markerId];
+
+    marker.remove();
 }
 
 /**
