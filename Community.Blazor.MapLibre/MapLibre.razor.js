@@ -1213,15 +1213,13 @@ export function createPopup(container, settings, options) {
 }
 
 export function createMarker(container, markerId, options, position) {
-    var marker = new maplibregl.Marker(options)
+    markerInstances[markerId] = new maplibregl.Marker(options)
         .setLngLat([position.lng, position.lat])
         .addTo(mapInstances[container]);
-
-    markerInstances[markerId] = marker;
 }
 
 export function removeMarker(markerId){
-    var marker = markerInstances[markerId];
+    const marker = markerInstances[markerId];
 
     marker.remove();
 }
