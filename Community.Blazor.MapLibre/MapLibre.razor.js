@@ -1218,6 +1218,10 @@ export function createMarker(container, markerId, options, position) {
         .addTo(mapInstances[container]);
 }
 
+/**
+ * Removes a marker by its ID.
+ * @param {string} markerId - The marker ID.
+ */
 export function removeMarker(markerId){
     const marker = markerInstances[markerId];
 
@@ -1226,9 +1230,7 @@ export function removeMarker(markerId){
 
 /**
  * Moves a marker to the specified coordinates
- * The only purpose of bulk transaction send multiple transactions in one message, reducing the roundtrip time.
- * Each action in the transaction is performed in the order they are received.
- * @param {string} markerId - The map container.
+ * @param {string} markerId - The marker ID.
  * @param {object} position - Options for animation like duration, offset, etc.
  */
 export function moveMarker(markerId, position) {
