@@ -39,6 +39,8 @@ export function initializeMap(options, dotnetReference) {
     map.on('load', function () {
         dotnetReference.invokeMethodAsync("OnLoadCallback")
     });
+    
+    return map;
 }
 
 /**

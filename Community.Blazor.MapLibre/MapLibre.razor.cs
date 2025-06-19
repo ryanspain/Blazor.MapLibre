@@ -46,6 +46,12 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// Used to facilitate communication between JavaScript and the .NET component.
     /// </summary>
     private DotNetObjectReference<MapLibre> _dotNetObjectReference = null!;
+    
+
+    /// <summary>
+    /// Represents the MapLibre map object instance that is created and managed by this component.
+    /// </summary>
+    private IJSObjectReference _mapObject = null!;
 
     #region Parameters
 
@@ -153,7 +159,13 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
             Options.Container = MapId;
 
             // Initialize the MapLibre map
-            await _jsModule.InvokeVoidAsync("initializeMap", Options, _dotNetObjectReference);
+            _mapObject = await _jsModule.InvokeAsync<IJSObjectReference>("initializeMap", Options, _dotNetObjectReference);
+            
+            // Load the plugins after the map has been initialized
+            foreach (var plugin in _plugins)
+            {
+                await plugin.Initialize(_mapObject, JsRuntime);
+            }
         }
     }
 
