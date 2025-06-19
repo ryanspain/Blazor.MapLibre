@@ -47,6 +47,10 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     /// </summary>
     private DotNetObjectReference<MapLibre> _dotNetObjectReference = null!;
     
+    /// <summary>
+    /// A collection of custom plugins that extend the functionality of the MapLibre map.
+    /// </summary>
+    private readonly List<IMapLibrePlugin> _plugins = new();
 
     /// <summary>
     /// Represents the MapLibre map object instance that is created and managed by this component.
@@ -167,6 +171,13 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
                 await plugin.Initialize(_mapObject, JsRuntime);
             }
         }
+    }
+    
+    public void RegisterPlugin(IMapLibrePlugin plugin)
+    {
+        ArgumentNullException.ThrowIfNull(plugin, nameof(plugin));
+
+        _plugins.Add(plugin);
     }
 
     public async ValueTask DisposeAsync()
