@@ -29,7 +29,7 @@ At a high-level, a plugin can, but not exclusively:
 
 3. Create a plugin JavaScript module.
 
-    A core rational for creating a plugin is to interop with the MapLibre object that was initialised in the core libraries JavaScript module. This map object can be passed into our JavaScript module if we design it to receive it.
+    A core rationale for creating a plugin is to interop with the MapLibre object that was initialised in the core libraries JavaScript module. This map object can be passed into our JavaScript module if we design it to receive it.
 
     Create a file named `MyMapLibreRotationPlugin.js` in the `/wwwroot` folder as below.
 
@@ -58,7 +58,7 @@ At a high-level, a plugin can, but not exclusively:
     }
     ```
 
-    Accepting the `dotnetReference` into the JavaScript module enables call back to the plugin C# class. It's not used in this example, but the implementation does not differ from the official guidance. See [Call .NET methods from JavaScript functions in ASP.NET Core Blazor](https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-dotnet-from-javascript?view=aspnetcore-9.0). It could be used to notify the plugin C# class that the JavaScript module has initialized, or the rotation has complected for example.
+    Accepting the `dotnetReference` into the JavaScript module enables call back to the plugin C# class. It's not used in this example, but the implementation does not differ from the official guidance. See [Call .NET methods from JavaScript functions in ASP.NET Core Blazor](https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-dotnet-from-javascript?view=aspnetcore-9.0). It could be used to notify the plugin C# class that the JavaScript module has initialized, or the rotation has completed for example.
 
 4. Create a plugin class.
 
