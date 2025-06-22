@@ -1,9 +1,8 @@
 using Community.Blazor.MapLibre.Models.Feature;
 using Community.Blazor.MapLibre.Models.Feature.Dto;
-using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Community.Blazor.MapLibre.Examples.WebAssembly.Plugins;
+namespace Community.Blazor.MapLibre.Examples.MapboxGlPlugin;
 
 public class MapboxGlDrawPlugin : IMapLibrePlugin
 {
