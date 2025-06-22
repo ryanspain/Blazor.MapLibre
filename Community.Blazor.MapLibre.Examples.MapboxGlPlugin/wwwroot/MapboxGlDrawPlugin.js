@@ -1,6 +1,7 @@
 let mapObject = {};
 let drawObject = {};
 let pluginDotnetReference = {};
+
 export function initialize(map, dotnetReference) {
     console.log("Plugin initialized");
     mapObject = map;
