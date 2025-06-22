@@ -34,6 +34,22 @@ public class MapboxGlDrawPlugin : IMapLibrePlugin
     private IJSObjectReference PluginJsModule { get; set; } = null!;
     
     /// <summary>
+    /// A reference to the <see cref="IJSObjectReference"/> JavaScript module instance for the Mapbox GL JS library.
+    /// </summary>
+    /// <remarks>
+    /// See <see href="https://docs.mapbox.com/mapbox-gl-js/api/">Mapbox GL JS API Reference</see> for more details.
+    /// </remarks>
+    private IJSObjectReference MapboxJsModule { get; set; } = null!;
+    
+    /// <summary>
+    /// A reference to the <see cref="IJSObjectReference"/> JavaScript module instance for the Turf.js library.
+    /// </summary>
+    /// <remarks>
+    /// See <see href="https://turfjs.org/">Turf.js documentation</see> for more details.
+    /// </remarks>
+    private IJSObjectReference TurfJsModule { get; set; } = null!;
+    
+    /// <summary>
     /// Triggered when a draw-related update occurs on the map.
     /// Allows the user to respond to changes or updates related to drawing features on the map,
     /// such as modifications to drawn shapes or geographic feature data updates.
@@ -51,8 +67,8 @@ public class MapboxGlDrawPlugin : IMapLibrePlugin
         PluginJsModule = await runtime.InvokeAsync<IJSObjectReference>("import", "/_content/MapboxGlDrawPlugin/MapboxGlDrawPlugin.js");
         
         // Import dependencies for the plugin
-        await runtime.InvokeAsync<IJSObjectReference>("import", "/_content/MapboxGlDrawPlugin/turf.min.js");
-        await runtime.InvokeAsync<IJSObjectReference>("import", "/_content/MapboxGlDrawPlugin/mapbox-gl-draw.js");
+        MapboxJsModule = await runtime.InvokeAsync<IJSObjectReference>("import", "/_content/MapboxGlDrawPlugin/mapbox-gl-draw.js");
+        TurfJsModule = await runtime.InvokeAsync<IJSObjectReference>("import", "/_content/MapboxGlDrawPlugin/turf.min.js");
         
         await PluginJsModule.InvokeVoidAsync("initialize", MapObject, PluginDotNetReference);
     }
@@ -88,6 +104,8 @@ public class MapboxGlDrawPlugin : IMapLibrePlugin
         try
         {
             await PluginJsModule.DisposeAsync();
+            await MapboxJsModule.DisposeAsync();
+            await TurfJsModule.DisposeAsync();
         }
         catch (JSDisconnectedException) { }
         catch (ObjectDisposedException) { }
