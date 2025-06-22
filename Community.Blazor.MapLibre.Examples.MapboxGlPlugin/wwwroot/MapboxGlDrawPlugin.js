@@ -8,6 +8,12 @@ export function initialize(map, dotnetReference) {
     pluginDotnetReference = dotnetReference;
 }
 
+/**
+ * Adds a Mapbox Draw control to the map instance.
+ *
+ * @param {Object} drawOptions - Options for configuring the Mapbox Draw control.
+ * @return {void} No return value.
+ */
 export function addControl(drawOptions) {
     MapboxDraw.constants.classes.CANVAS  = 'maplibregl-canvas';
     MapboxDraw.constants.classes.CONTROL_BASE  = 'maplibregl-ctrl';
@@ -34,7 +40,6 @@ export function addControl(drawOptions) {
 /**
  * Adds a feature to the draw instance associated with the specified container.
  *
- * @param {string} container - The identifier for the container associated with a draw instance.
  * @param {Object} feature - The feature object to be added to the draw instance.
  * @return {void} No return value.
  */
