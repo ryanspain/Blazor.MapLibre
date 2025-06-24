@@ -37,6 +37,13 @@ export function initializeMap(options, dotnetReference) {
     });
 
     map.on('load', function () {
+        if (map.areTilesLoaded()) {
+            window.document.getElementById('map-loading-container').classList.add('hidden');
+        } else {
+            map.once('idle', () => {
+                window.document.getElementById('map-loading-container').classList.add('hidden');
+            });
+        }
         dotnetReference.invokeMethodAsync("OnLoadCallback")
     });
 }
