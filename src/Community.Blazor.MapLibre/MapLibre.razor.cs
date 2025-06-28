@@ -388,6 +388,15 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
         await _jsModule.InvokeVoidAsync("fitBounds", MapId, bounds, options, eventData);
 
     /// <summary>
+    /// Sets or clears the map's geographical bounds.
+    /// </summary>
+    /// <param name="bounds">The maximum bounds to set. If null or undefined is provided, the function removes the map's maximum bounds.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <see href="https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setmaxbounds">setMaxBounds</see>
+    public async ValueTask SetMaxBounds(LngLatBounds bounds) =>
+        await _jsModule.InvokeVoidAsync("setMaxBounds", MapId, bounds);
+
+    /// <summary>
     /// Pans, rotates, and zooms the map to fit the bounding box formed by two given screen points
     /// after rotating the map to the specified bearing. If the current map bearing is passed, the map will
     /// zoom without rotating.

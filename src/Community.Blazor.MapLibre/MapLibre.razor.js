@@ -259,6 +259,19 @@ export function fitBounds(container, bounds, options, eventData) {
 }
 
 /**
+ * Sets or clears the map's geographical bounds.
+ *
+ * @param {string} container - The identifier for the map container that needs to fit the bounds.
+ * @param {Object} bounds - The maximum bounds to set. If null or undefined is provided, the function removes the map's maximum bounds.
+ */
+export function setMaxBounds(container, bounds) {
+    mapInstances[container].setMaxBounds([
+        [bounds._sw.lng, bounds._sw.lat], // Southwest corner
+        [bounds._ne.lng, bounds._ne.lat]  // Northeast corner
+    ]);
+}
+
+/**
  * Adjusts the map view to fit the given screen coordinates.
  *
  * @function fitScreenCoordinates
