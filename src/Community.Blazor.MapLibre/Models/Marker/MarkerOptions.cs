@@ -114,4 +114,13 @@ public class MarkerOptions
     [JsonPropertyName("subpixelPositioning")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? SubpixelPositioning { get; set; }
+
+    /// <summary>
+    /// The HTML content that will be added to the marker after its creation.
+    /// </summary>
+    /// <remarks>
+    /// If no HTML content is desired, this value should be left empty.
+    /// </remarks>
+    [JsonIgnore]
+    public string HtmlContent { get; set; } = string.Empty;
 }
