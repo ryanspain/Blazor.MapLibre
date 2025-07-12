@@ -1251,8 +1251,7 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     public async Task<Guid> AddMarker(MarkerOptions options, LngLat position, Guid? markerId = null)
     {
         var id = markerId ?? Guid.NewGuid();
-        await _jsModule.InvokeVoidAsync("createMarker", MapId, id, options, position);
-
+        await _jsModule.InvokeVoidAsync("createMarker", MapId, id, options, position, options.HtmlContent);
         return id;
     }
 

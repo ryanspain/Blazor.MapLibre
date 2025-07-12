@@ -1187,10 +1187,16 @@ export function createPopup(container, settings, options) {
         .addTo(mapInstances[container]);
 }
 
-export function createMarker(container, markerId, options, position) {
+export function createMarker(container, markerId, options, position, htmlContent = "") {
     markerInstances[markerId] = new maplibregl.Marker(options)
         .setLngLat([position.lng, position.lat])
         .addTo(mapInstances[container]);
+    
+    if (htmlContent.length > 0) {
+        const element = markerInstances[markerId].getElement();
+        
+        element.innerHTML = htmlContent;
+    }
 }
 
 export function createMarkerWithImage(container, markerId, options, position, url, classes) {
@@ -1200,7 +1206,7 @@ export function createMarkerWithImage(container, markerId, options, position, ur
     }
     
     div.style.backgroundImage = `url(${url})`;
-
+    
     markerInstances[markerId] = new maplibregl.Marker({options: options, element: div})
         .setLngLat([position.lng, position.lat])
         .addTo(mapInstances[container]);
