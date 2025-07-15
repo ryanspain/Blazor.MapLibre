@@ -1187,15 +1187,17 @@ export function createPopup(container, settings, options) {
         .addTo(mapInstances[container]);
 }
 
-export function createMarker(container, markerId, options, position, htmlContent = "") {
+export function createMarker(container, markerId, options, position) {
     markerInstances[markerId] = new maplibregl.Marker(options)
         .setLngLat([position.lng, position.lat])
         .addTo(mapInstances[container]);
     
-    if (htmlContent.length > 0) {
-        const element = markerInstances[markerId].getElement();
+    if (options.extensions) {
+        const extensions = options.extensions;
         
-        element.innerHTML = htmlContent;
+        if (extensions.htmlContent.length > 0) {
+            markerInstances[markerId].getElement().innerHTML = extensions.htmlContent;
+        }
     }
 }
 
