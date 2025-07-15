@@ -17,7 +17,7 @@ public class MarkerOptions
     public MarkerAnchor? Anchor { get; set; }
 
     /// <summary>
-    /// Space-separated CSS class names to add to marker element.
+    /// Space-separated CSS class names to add to a marker element.
     /// </summary>
     [JsonPropertyName("className")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -121,6 +121,6 @@ public class MarkerOptions
     /// <remarks>
     /// If no HTML content is desired, this value should be left empty.
     /// </remarks>
-    [JsonIgnore]
-    public string HtmlContent { get; set; } = string.Empty;
+    [JsonPropertyName("extensions")]
+    public MarkerOptionsExtensions? Extensions { get; set; }
 }
