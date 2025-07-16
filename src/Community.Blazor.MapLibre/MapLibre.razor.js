@@ -1191,19 +1191,14 @@ export function createMarker(container, markerId, options, position) {
     markerInstances[markerId] = new maplibregl.Marker(options)
         .setLngLat([position.lng, position.lat])
         .addTo(mapInstances[container]);
-}
-
-export function createMarkerWithImage(container, markerId, options, position, url, classes) {
-    const div = document.createElement('div');
-    if (classes.length > 0) {
-        div.classList.add(...classes);
-    }
     
-    div.style.backgroundImage = `url(${url})`;
-
-    markerInstances[markerId] = new maplibregl.Marker({options: options, element: div})
-        .setLngLat([position.lng, position.lat])
-        .addTo(mapInstances[container]);
+    if (options.extensions) {
+        const extensions = options.extensions;
+        
+        if (extensions.htmlContent.length > 0) {
+            markerInstances[markerId].getElement().innerHTML = extensions.htmlContent;
+        }
+    }
 }
 
 /**

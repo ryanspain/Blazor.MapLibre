@@ -1252,19 +1252,9 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     {
         var id = markerId ?? Guid.NewGuid();
         await _jsModule.InvokeVoidAsync("createMarker", MapId, id, options, position);
-
         return id;
     }
-
-    public async Task<Guid> AddMarkerWithImage(MarkerOptions options, LngLat position, string url, IEnumerable<string>? classes = null, Guid? markerId = null)
-    {
-        var id = markerId ?? Guid.NewGuid();
-        
-        await _jsModule.InvokeVoidAsync("createMarkerWithImage", MapId, id, options, position, url, classes ?? []);
-
-        return id;
-    }
-
+    
     /// <summary>
     /// Removes a marker from the map by its unique identifier.
     /// </summary>
@@ -1273,6 +1263,11 @@ public partial class MapLibre : ComponentBase, IAsyncDisposable
     public async Task RemoveMarker(Guid markerId)
         => await _jsModule.InvokeVoidAsync("removeMarker", markerId);
     
+    /// <summary>
+    /// Moves a marker on the map.
+    /// </summary>
+    /// <param name="markerId">The uniqued identifier of the marker that will be moved.</param>
+    /// <param name="position">The new position to which the marker will be moved.</param>
     public async Task MoveMarker(Guid markerId, LngLat position)
         => await _jsModule.InvokeVoidAsync("moveMarker", markerId, position);
 
