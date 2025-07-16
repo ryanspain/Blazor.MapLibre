@@ -116,11 +116,9 @@ public class MarkerOptions
     public bool? SubpixelPositioning { get; set; }
 
     /// <summary>
-    /// The HTML content that will be added to the marker after its creation.
+    /// An object representing additional, non-standard extensions for marker configuration.
+    /// Extensions can include properties or functionality not directly supported by the default MarkerOptions, allowing for enhanced customization.
     /// </summary>
-    /// <remarks>
-    /// If no HTML content is desired, this value should be left empty.
-    /// </remarks>
     [JsonPropertyName("extensions")]
     public MarkerOptionsExtensions? Extensions { get; set; }
 }
