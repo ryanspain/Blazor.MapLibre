@@ -24,6 +24,6 @@ public sealed class MarkerOptionsExtensions
     /// <summary>
     /// The HTML content that will be attached to the marker on click interaction.
     /// </summary>
-    [JsonPropertyName("popupContent")]
-    public string PopupContent { get; set; } = string.Empty;
+    [JsonPropertyName("popupHtmlContent")]
+    public string PopupHtmlContent { get; set; } = string.Empty;
 }
