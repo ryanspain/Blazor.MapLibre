@@ -1199,10 +1199,10 @@ export function createMarker(container, markerId, options, position) {
             markerInstances[markerId].getElement().innerHTML = extensions.htmlContent;
         }
         
-        if (extensions.popupContent.length > 0) {
+        if (extensions.popupHtmlContent.length > 0) {
             markerInstances[markerId].setPopup(
                 new maplibregl.Popup({ offset: 25 })
-                    .setHTML(extensions.popupContent)
+                    .setHTML(extensions.popupHtmlContent)
             );
         }
     }
