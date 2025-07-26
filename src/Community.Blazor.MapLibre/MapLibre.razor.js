@@ -865,8 +865,16 @@ export function redraw(container) {
  * @param {string} container - The map container.
  */
 export function remove(container) {
-    mapInstances[container].remove();
-    delete mapInstances[container];
+    if (mapInstances[container]) {
+        mapInstances[container].remove();
+        delete mapInstances[container];
+    }
+    if (optionsInstances[container]) {
+        delete optionsInstances[container];
+    }
+    if (markerInstances[container]) {
+        delete markerInstances[container];
+    }
 }
 
 /**
