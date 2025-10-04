@@ -63,7 +63,7 @@ jobs:
 #        if: ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && startsWith(github.ref_name, 'main'))
         uses: actions/upload-pages-artifact@v3
         with:
-          path: blazor_build_output/wwwroot
+          path: blazor_build_output/dist
 
   # Job 2: Publish NuGet Package
 #  publish:

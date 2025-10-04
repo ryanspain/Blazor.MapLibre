@@ -3,7 +3,8 @@ export default {
 
         // Create a base element to set the base URL for the Blazor app
         let baseElement = document.createElement('base')
-        baseElement.href = '/';
+        const isLocalhost = window.location.hostname === "localhost";
+        baseElement.href = isLocalhost ? "/" : "/Blazor.MapLibre/";
         document.head.appendChild(baseElement);
         
         // Create a link element to import stylesheets
